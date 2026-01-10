@@ -250,7 +250,7 @@ function Stats() {
 
 /* ================= ABOUT ================= */
 function About() {
-  const skills = ["Python", "React", "Machine Learning", "JavaScript", "AI/ML"];
+  const skills = ["Python", "React","React Native", "JavaScript", "Django", "Cyber Security", "SQL", "Tailwind CSS",];
 
   return (
     <section id="about" className="py-32 max-w-6xl mx-auto px-6">
