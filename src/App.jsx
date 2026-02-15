@@ -250,7 +250,14 @@ function Stats() {
 
 /* ================= ABOUT ================= */
 function About() {
-  const skills = ["Python", "React","React Native", "JavaScript", "Django", "Cyber Security", "SQL", "Tailwind CSS",];
+  const skills = ["Python","Java", "React","React Native", "JavaScript","TypeScript","HTML/CSS", "Django", "Cyber Security", "SQL", "Tailwind CSS",];
+     const colors = [
+  "bg-blue-500/20 text-blue-300 border-blue-400/30",
+  "bg-orange-500/20 text-orange-300 border-orange-400/30",
+  "bg-green-500/20 text-green-300 border-green-400/30",
+  "bg-pink-500/20 text-pink-300 border-pink-400/30",
+  "bg-purple-500/20 text-purple-300 border-purple-400/30",
+];
 
   return (
     <section id="about" className="py-32 max-w-6xl mx-auto px-6">
@@ -291,17 +298,21 @@ function About() {
           </p>
 
           <h3 className="text-2xl font-semibold text-cyan-400 mb-4">Skills</h3>
-          <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-            {skills.map((s, i) => (
-              <motion.span
-                key={i}
-                whileHover={{ scale: 1.15, rotate: [0, 3, -3, 0] }}
-                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm cursor-pointer transition"
-              >
-                {s}
-              </motion.span>
-            ))}
-          </div>
+       
+
+<div className="flex flex-wrap gap-3 justify-center md:justify-start">
+  {skills.map((s, i) => (
+    <motion.span
+      key={i}
+      whileHover={{ scale: 1.15, rotate: [0, 3, -3, 0] }}
+      className={`px-4 py-2 rounded-full border text-sm cursor-pointer transition
+        ${colors[i % colors.length]}`}
+    >
+      {s}
+    </motion.span>
+  ))}
+</div>
+
         </motion.div>
       </div>
     </section>
@@ -322,6 +333,7 @@ function Experience() {
       time: "2023 - Present",
       desc: "Frontend and backend development using React, Django, and SQL.",
       icon: <Briefcase size={24} />,
+      
     },
     {
       title: "Web Development Intern",
@@ -394,6 +406,13 @@ function Experience() {
               <p className="text-sm text-gray-500">{d.time}</p>
               <p className="mt-2 text-gray-300 text-sm">{d.desc}</p>
             </motion.div>
+
+            
+
+
+              
+
+
           ))}
         </div>
 
@@ -438,37 +457,58 @@ import { Award, Star,  } from "lucide-react";
 function Certifications() {
   const certs = [
     {
-      title: "AI & Machine Learning",
-      org: "Tech Labs",
-      desc: "Deep dive into neural networks, ML pipelines, and AI models.",
-      url: "#",
+      title: "internet of Things (IoT)",
+      org: "NPTEL",
+      desc: "introduction to IoT concepts, architecture, and applications.",
+      url: "",
       icon: <Award size={20} />,
     },
     {
-      title: "Full Stack Development",
-      org: "Code Academy",
-      desc: "Built multiple web apps using React, Node.js, and databases.",
+      title: "Soft Skills for Professionals",
+      org: "NPTEL",
+      desc: "Communication, teamwork, and problem-solving skills for the workplace.",
       url: "#",
       icon: <Star size={20} />,
     },
     {
-      title: "Cyber Security",
-      org: "CyberSafe Institute",
-      desc: "Learned ethical hacking, penetration testing, and vulnerabilities.",
+      title: "Artificial intelligence",
+      org: "Physics Wallah (PW)",
+      desc: "Fundamentals of AI, including machine learning, neural networks, and real-world applications.",
       url: "#",
       icon: <Star size={20} />,
     },
     {
-      title: "Python for Data Science",
-      org: "DataCamp",
+      title: "Python Essentials",
+      org: "Cisco",
       desc: "Explored Python libraries for analysis and visualization.",
       url: "#",
       icon: <Award size={20} />,
     },
     {
-      title: "Cloud Computing",
-      org: "AWS Academy",
-      desc: "Basics of cloud services, deployment, and server management.",
+      title: "Introduction to Cybersecurity",
+      org: "Cisco",
+      desc: "covered cybersecurity principles, threats, and best practices.",
+      url: "#",
+      icon: <Star size={20} />,
+    },
+    {
+      title: "CyberSecurity Institute Certified Instructor (CSICI)",
+      org: "TheTechUnique Academy",
+      desc: "hands-on training in cybersecurity concepts, tools, and techniques.",
+      url: "#",
+      icon: <Star size={20} />,
+    },
+    {
+      title: "Online Python programming training ",
+      org: "Infosys",
+      desc: "covered Python programming concepts, data structures, and applications.",
+      url: "#",
+      icon: <Star size={20} />,
+    },
+    {
+      title: "React Bootcamp ",
+      org: "LetsUpgrade",
+      desc: "covered React fundamentals, hooks, and component architecture.",
       url: "#",
       icon: <Star size={20} />,
     },
@@ -543,13 +583,19 @@ function Projects() {
       name: "SVVV-Notes-Website",
       desc: "SVVV Notes – A simple and reliable platform for students to access quality notes anytime, anywhere.",
       tech: ["React", "CSS", "JavaScript", "python", "Django", "SQL"],
-      url: "https://svvv-notes-website.vercel.app/",
+      url: "https://svvv-notes-website-poij.vercel.app/",
     },
     {
       name: "E-Commerce-Platform",
       desc: "A full-stack shopping platform featuring product catalogs, shopping cart, payment integration, and real-time inventory updates using React, Node.js, and MongoDB.",
       tech: ["React", "Tailwind", "python", "Django", "SQL"],
       url: "https://simple-e-commerce-website-beta.vercel.app/",
+    },
+    {
+      name: "JobSt@ack",
+      desc: "A modern Job Portal Web Application. Search Jobs,Apply Jobs,Save Jobs ,Track Applications, Manage Profile,Resume Builder,Premium Services,Admin Job Posting",
+      tech: ["React", "CSS","Python", "Django"],
+      url: "https://github.com/manish780386/JobStack.git",
     },
   ];
 
@@ -620,28 +666,35 @@ function Skills() {
       { name: "Next.js", icon: <Code size={20} /> },     
       { name: "HTML", icon: <Code size={20} /> },        
       { name: "CSS", icon: <Code size={20} /> },         
-      { name: "JavaScript", icon: <Code size={20} /> },  
+      { name: "JavaScript", icon: <Code size={20} /> }, 
+       { name: "BootStrap", icon: <Code size={20} /> },
+       { name: "React Native", icon: <Code size={20} /> },  
+       { name: "TypeScript", icon: <Code size={20} /> }, 
+
     ],
     Backend: [
-      { name: "Node.js", icon: <Server size={20} /> },
+      
       { name: "Django", icon: <Server size={20} /> },
-      { name: "Express", icon: <Server size={20} /> },
+      { name: "Python", icon: <Server size={20} /> },
+      
       { name: "REST APIs", icon: <Terminal size={20} /> },
-      { name: "GraphQL", icon: <Zap size={20} /> },
+      
     ],
     Database: [
-      { name: "MongoDB", icon: <Database size={20} /> },
+     
       { name: "MySQL", icon: <Database size={20} /> },
       { name: "PostgreSQL", icon: <Database size={20} /> },
       { name: "Firebase", icon: <Cloud size={20} /> },
     ],
     Tools: [
      
-      { name: "Docker", icon: <HardDrive size={20} /> },
+      
       { name: "Linux", icon: <Terminal size={20} /> },
       { name: "VS Code", icon: <Code size={20} /> },
       { name: "Postman", icon: <Terminal size={20} /> },
-      { name: "Figma", icon: <Figma size={20} /> },
+      { name: "Git", icon: <Terminal size={20} /> },
+        { name: "Docker", icon: <HardDrive size={20} /> },
+      
     ],
     Learning: [
       { name: "AI / ML", icon: <Zap size={20} /> },
