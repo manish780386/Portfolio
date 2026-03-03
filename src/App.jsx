@@ -634,25 +634,25 @@ function Certifications() {
 function Projects() {
   const projects = [
     {
-      name: "Portfolio Website",
+      name: " 🖥️ Portfolio Website",
       desc: "A modern, animated portfolio showcasing projects with smooth scroll, dark mode UI, and interactive elements using React, Tailwind CSS, and Framer Motion.",
       tech: ["React", "Tailwind", "Framer Motion"],
       url: "#", // live project link
     },
     {
-      name: "SVVV-Notes-Website",
+      name: " 📚 SVVV-Notes-Website",
       desc: "SVVV Notes – A simple and reliable platform for students to access quality notes anytime, anywhere.",
       tech: ["React", "CSS", "JavaScript", "python", "Django", "SQL"],
       url: "https://svvv-notes-website-poij.vercel.app/",
     },
     {
-      name: "E-Commerce-Platform",
+      name: " 🛒 E-Commerce-Platform",
       desc: "A full-stack shopping platform featuring product catalogs, shopping cart, payment integration, and real-time inventory updates using React, Node.js, and MongoDB.",
       tech: ["React", "Tailwind", "python", "Django", "SQL"],
       url: "https://simple-e-commerce-website-beta.vercel.app/",
     },
     {
-      name: "JobSt@ack",
+      name: " 📋 JobSt@ack",
       desc: "A modern Job Portal Web Application. Search Jobs,Apply Jobs,Save Jobs ,Track Applications, Manage Profile,Resume Builder,Premium Services,Admin Job Posting",
       tech: ["React", "CSS", "Python", "Django"],
       url: "https://github.com/manish780386/JobStack.git",
@@ -668,7 +668,13 @@ function Projects() {
       desc: "A platform for farmers to access market information, sell their produce, and connect with potential buyers.",
       tech: ["React", "TypeScript", "tailwind"],
       url: "https://github.com/manish780386/-KisanMitra.git",
-    }
+    },
+    {
+      name: "LIC Agent Website",
+      desc: "A comprehensive website for LIC agents to manage their clients, policies, and sales. But he is my real project and i am working on it from  6 months and i am still working on it and i will complete it soon",
+      tech: ["React", "Tailwind", "Python", "Django"],
+      url: "https://santosh-gayakwad-lic.vercel.app/",
+    },
 
   ];
 
