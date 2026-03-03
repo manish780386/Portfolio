@@ -41,18 +41,29 @@ function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 120, damping: 14 }}
-      className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10 shadow-md"
+      className="fixed top-0 w-full z-50 
+      bg-gradient-to-r from-black/80 via-gray-900/80 to-black/80 
+      backdrop-blur-xl border-b border-pink-500/20 shadow-lg"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+        {/* LOGO */}
         <motion.span
-          className="text-xl font-black bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent cursor-pointer"
-          whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
+          className="text-xl font-black 
+          bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 
+          bg-clip-text text-transparent cursor-pointer"
+          whileHover={{
+            scale: 1.1,
+            rotate: [0, 5, -5, 0],
+            textShadow: "0px 0px 20px rgba(255,0,255,0.8)"
+          }}
           transition={{ type: "spring", stiffness: 300, damping: 12 }}
         >
           Manish Dange
         </motion.span>
 
         <div className="hidden md:flex gap-8 items-center">
+
           {links.map((l) => (
             <motion.div key={l}>
               <Link
@@ -60,12 +71,13 @@ function Navbar() {
                 smooth
                 offset={-80}
                 duration={600}
-                className="relative text-sm text-gray-300 cursor-pointer"
+                className="relative text-sm text-gray-300 cursor-pointer 
+                hover:text-pink-400 transition duration-300"
               >
                 {l.toUpperCase()}
                 <motion.span
-                  layoutId="underline"
-                  className="absolute left-0 bottom-0 w-full h-[2px] bg-cyan-400 rounded"
+                  className="absolute left-0 -bottom-1 w-full h-[2px] 
+                  bg-gradient-to-r from-pink-400 to-blue-400 rounded"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -81,8 +93,15 @@ function Navbar() {
             onHoverEnd={() => setOpenFeatures(false)}
           >
             <motion.span
-              className="cursor-pointer text-sm text-gray-300 px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-white/10 shadow-sm transition-all"
-              whileHover={{ scale: 1.05, textShadow: "0 0 10px #00ffff" }}
+              className="cursor-pointer text-sm text-gray-300 
+              px-3 py-2 rounded-lg 
+              hover:text-pink-400 
+              hover:bg-white/5 
+              transition-all"
+              whileHover={{
+                scale: 1.05,
+                textShadow: "0 0 15px #ff00ff"
+              }}
             >
               FEATURES ▾
             </motion.span>
@@ -94,13 +113,18 @@ function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -20, scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                  className="absolute top-10 left-0 w-48 bg-[#0b0f1f] border border-white/10 rounded-xl overflow-hidden shadow-2xl"
+                  className="absolute top-10 left-0 w-48 
+                  bg-gradient-to-b from-gray-900 to-black 
+                  border border-pink-500/20 
+                  rounded-xl overflow-hidden shadow-2xl"
                 >
                   <Link
                     to="experience"
                     smooth
                     offset={-80}
-                    className="block px-4 py-3 text-gray-300 hover:bg-white/5 hover:text-cyan-400 transition"
+                    className="block px-4 py-3 text-gray-300 
+                    hover:bg-pink-500/10 
+                    hover:text-pink-400 transition"
                   >
                     Experience
                   </Link>
@@ -108,7 +132,9 @@ function Navbar() {
                     to="certifications"
                     smooth
                     offset={-80}
-                    className="block px-4 py-3 text-gray-300 hover:bg-white/5 hover:text-cyan-400 transition"
+                    className="block px-4 py-3 text-gray-300 
+                    hover:bg-blue-500/10 
+                    hover:text-blue-400 transition"
                   >
                     Certifications
                   </Link>
@@ -116,6 +142,7 @@ function Navbar() {
               )}
             </AnimatePresence>
           </motion.div>
+
         </div>
       </div>
     </motion.nav>
@@ -124,21 +151,24 @@ function Navbar() {
 
 
 
-
 /* ================= HERO ================= */
 function Hero() {
   return (
-    <section id="home" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+    <section
+      id="home"
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden 
+      bg-gradient-to-br from-black via-gray-900 to-gray-950 text-white"
+    >
       {/* BACKGROUND BLUR CIRCLES */}
       <motion.div
         animate={{ x: [0, 200, 0], y: [0, -200, 0] }}
         transition={{ repeat: Infinity, duration: 20 }}
-        className="absolute w-96 h-96 bg-indigo-500/30 blur-[140px] rounded-full top-10 left-10"
+        className="absolute w-96 h-96 bg-pink-500/30 blur-[140px] rounded-full top-10 left-10"
       />
       <motion.div
         animate={{ x: [0, -200, 0], y: [0, 200, 0] }}
         transition={{ repeat: Infinity, duration: 25 }}
-        className="absolute w-96 h-96 bg-cyan-500/20 blur-[140px] rounded-full bottom-10 right-10"
+        className="absolute w-96 h-96 bg-blue-500/30 blur-[140px] rounded-full bottom-10 right-10"
       />
 
       {/* MAIN HERO CONTENT */}
@@ -152,10 +182,13 @@ function Hero() {
           className="text-6xl md:text-8xl font-black cursor-pointer"
           animate={{ y: [0, -10, 0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-          whileHover={{ scale: 1.05, textShadow: "0px 0px 20px rgba(0,255,255,0.6)" }}
+          whileHover={{
+            scale: 1.05,
+            textShadow: "0px 0px 25px rgba(255,0,255,0.7)",
+          }}
         >
           Hi, I’m{" "}
-          <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
             Manish Dange
           </span>
         </motion.h1>
@@ -167,7 +200,10 @@ function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          Creative Web Developer and Cyber Security Enthusiast | Driven Computer Science undergraduate specializing in  Cyber Security at SVVV University. Passionate about building full-stack web applications that seamlessly integrate AI solutions and data-driven insights.
+          Creative Web Developer and Cyber Security Enthusiast | Driven Computer
+          Science undergraduate specializing in Cyber Security at SVVV
+          University. Passionate about building full-stack web applications that
+          seamlessly integrate AI solutions and data-driven insights.
         </motion.p>
 
         {/* BUTTONS */}
@@ -177,17 +213,31 @@ function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
+          {/* Primary Button */}
           <motion.a
             href="#projects"
-            whileHover={{ scale: 1.1, boxShadow: "0px 0px 20px rgba(0,255,255,0.6)" }}
-            className="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 font-semibold text-white transition"
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0px 0px 30px rgba(255,0,255,0.6)",
+            }}
+            className="px-8 py-4 rounded-full 
+            bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+            font-semibold text-white transition duration-300"
           >
             View My Work
           </motion.a>
+
+          {/* Secondary Button */}
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.1, boxShadow: "0px 0px 20px rgba(0,255,255,0.6)" }}
-            className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 text-white font-semibold transition"
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0px 0px 30px rgba(0,255,255,0.6)",
+            }}
+            className="px-8 py-4 rounded-full 
+            border border-cyan-400 text-cyan-300 
+            hover:bg-cyan-400/10 
+            font-semibold transition duration-300"
           >
             Get In Touch
           </motion.a>
@@ -200,9 +250,11 @@ function Hero() {
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
       >
-        <span className="text-gray-400 mb-2 animate-pulse">Scroll Down</span>
+        <span className="text-gray-400 mb-2 animate-pulse">
+          Scroll Down
+        </span>
         <motion.div
-          className="w-3 h-3 rounded-full bg-cyan-400"
+          className="w-3 h-3 rounded-full bg-pink-400"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         />
@@ -210,7 +262,6 @@ function Hero() {
     </section>
   );
 }
-
 
 /* ================= STATS ================= */
 function Stats() {
@@ -250,14 +301,14 @@ function Stats() {
 
 /* ================= ABOUT ================= */
 function About() {
-  const skills = ["Python","Java", "React","React Native", "JavaScript","TypeScript","HTML/CSS", "Django", "Cyber Security", "SQL", "Tailwind CSS",];
-     const colors = [
-  "bg-blue-500/20 text-blue-300 border-blue-400/30",
-  "bg-orange-500/20 text-orange-300 border-orange-400/30",
-  "bg-green-500/20 text-green-300 border-green-400/30",
-  "bg-pink-500/20 text-pink-300 border-pink-400/30",
-  "bg-purple-500/20 text-purple-300 border-purple-400/30",
-];
+  const skills = ["Python", "Java", "React", "React Native", "JavaScript", "TypeScript", "HTML/CSS", "Django", "Cyber Security", "SQL", "Tailwind CSS",];
+  const colors = [
+    "bg-blue-500/20 text-blue-300 border-blue-400/30",
+    "bg-orange-500/20 text-orange-300 border-orange-400/30",
+    "bg-green-500/20 text-green-300 border-green-400/30",
+    "bg-pink-500/20 text-pink-300 border-pink-400/30",
+    "bg-purple-500/20 text-purple-300 border-purple-400/30",
+  ];
 
   return (
     <section id="about" className="py-32 max-w-6xl mx-auto px-6">
@@ -298,20 +349,20 @@ function About() {
           </p>
 
           <h3 className="text-2xl font-semibold text-cyan-400 mb-4">Skills</h3>
-       
 
-<div className="flex flex-wrap gap-3 justify-center md:justify-start">
-  {skills.map((s, i) => (
-    <motion.span
-      key={i}
-      whileHover={{ scale: 1.15, rotate: [0, 3, -3, 0] }}
-      className={`px-4 py-2 rounded-full border text-sm cursor-pointer transition
+
+          <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+            {skills.map((s, i) => (
+              <motion.span
+                key={i}
+                whileHover={{ scale: 1.15, rotate: [0, 3, -3, 0] }}
+                className={`px-4 py-2 rounded-full border text-sm cursor-pointer transition
         ${colors[i % colors.length]}`}
-    >
-      {s}
-    </motion.span>
-  ))}
-</div>
+              >
+                {s}
+              </motion.span>
+            ))}
+          </div>
 
         </motion.div>
       </div>
@@ -333,7 +384,7 @@ function Experience() {
       time: "2023 - Present",
       desc: "Frontend and backend development using React, Django, and SQL.",
       icon: <Briefcase size={24} />,
-      
+
     },
     {
       title: "Web Development Intern",
@@ -407,10 +458,10 @@ function Experience() {
               <p className="mt-2 text-gray-300 text-sm">{d.desc}</p>
             </motion.div>
 
-            
 
 
-              
+
+
 
 
           ))}
@@ -451,7 +502,7 @@ function Experience() {
 
 
 
-import { Award, Star,  } from "lucide-react";
+import { Award, Star, } from "lucide-react";
 
 /* ================= CERTIFICATIONS ================= */
 function Certifications() {
@@ -557,7 +608,16 @@ function Certifications() {
               href={c.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-block px-6 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold text-sm hover:scale-105 hover:shadow-lg transition-all"
+              className={`mt-4 inline-block px-6 py-2 rounded-full 
+  text-white font-semibold text-sm 
+  transition-all duration-300 
+  hover:scale-110 hover:shadow-2xl
+  ${i % 3 === 0
+                  ? "bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:shadow-pink-500/40"
+                  : i % 3 === 1
+                    ? "bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-400 hover:shadow-cyan-500/40"
+                    : "bg-gradient-to-r from-fuchsia-500 via-pink-500 to-rose-500 hover:shadow-rose-500/40"
+                }`}
             >
               View
             </a>
@@ -594,9 +654,22 @@ function Projects() {
     {
       name: "JobSt@ack",
       desc: "A modern Job Portal Web Application. Search Jobs,Apply Jobs,Save Jobs ,Track Applications, Manage Profile,Resume Builder,Premium Services,Admin Job Posting",
-      tech: ["React", "CSS","Python", "Django"],
+      tech: ["React", "CSS", "Python", "Django"],
       url: "https://github.com/manish780386/JobStack.git",
     },
+    {
+      name: "☕ Velvet Brew Café Website",
+      desc: "A visually appealing and user-friendly website for a local café, featuring a menu, online ordering, and reservation system using React, Tailwind CSS, and Framer Motion and add admin panel for manage the website",
+      tech: ["React", "Tailwind", "Python", "Django","Framer Motion","Three.js"],
+      url: "https://github.com/manish780386/Velvet-Brew-Cafe-Website.git",
+    },
+    {
+      name: "🌾 KisanMitra – Smart Farmer Assistant Platform",
+      desc: "A platform for farmers to access market information, sell their produce, and connect with potential buyers.",
+      tech: ["React", "TypeScript", "tailwind"],
+      url: "https://github.com/manish780386/-KisanMitra.git",
+    }
+
   ];
 
   return (
@@ -631,9 +704,19 @@ function Projects() {
               href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-block px-6 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold text-sm hover:scale-105 hover:shadow-lg transition-all"
+              className="relative mt-6 inline-block px-6 py-2 rounded-full 
+  font-semibold text-sm text-white 
+  bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500
+  transition-all duration-300
+  hover:scale-110 hover:shadow-[0_0_25px_rgba(255,0,255,0.6)]
+  overflow-hidden group"
             >
-              View Project
+              <span className="relative z-10">View Project</span>
+
+              {/* Shine Effect */}
+              <span className="absolute inset-0 bg-white/20 
+  translate-x-[-100%] group-hover:translate-x-[100%] 
+  transition-transform duration-700"></span>
             </a>
           </motion.div>
         ))}
@@ -649,7 +732,7 @@ import {
   Database,
   Zap,
   Users,
-  
+
   Figma,
   Terminal,
   Cloud,
@@ -662,39 +745,39 @@ function Skills() {
     Frontend: [
       { name: "React", icon: <Code size={20} /> },       // React icon
       { name: "Tailwind", icon: <Code size={20} /> },    // Tailwind
-      { name: "Framer Motion", icon: <Zap size={20} /> }, 
-      { name: "Next.js", icon: <Code size={20} /> },     
-      { name: "HTML", icon: <Code size={20} /> },        
-      { name: "CSS", icon: <Code size={20} /> },         
-      { name: "JavaScript", icon: <Code size={20} /> }, 
-       { name: "BootStrap", icon: <Code size={20} /> },
-       { name: "React Native", icon: <Code size={20} /> },  
-       { name: "TypeScript", icon: <Code size={20} /> }, 
+      { name: "Framer Motion", icon: <Zap size={20} /> },
+      { name: "Next.js", icon: <Code size={20} /> },
+      { name: "HTML", icon: <Code size={20} /> },
+      { name: "CSS", icon: <Code size={20} /> },
+      { name: "JavaScript", icon: <Code size={20} /> },
+      { name: "BootStrap", icon: <Code size={20} /> },
+      { name: "React Native", icon: <Code size={20} /> },
+      { name: "TypeScript", icon: <Code size={20} /> },
 
     ],
     Backend: [
-      
+
       { name: "Django", icon: <Server size={20} /> },
       { name: "Python", icon: <Server size={20} /> },
-      
+
       { name: "REST APIs", icon: <Terminal size={20} /> },
-      
+
     ],
     Database: [
-     
+
       { name: "MySQL", icon: <Database size={20} /> },
       { name: "PostgreSQL", icon: <Database size={20} /> },
       { name: "Firebase", icon: <Cloud size={20} /> },
     ],
     Tools: [
-     
-      
+
+
       { name: "Linux", icon: <Terminal size={20} /> },
       { name: "VS Code", icon: <Code size={20} /> },
       { name: "Postman", icon: <Terminal size={20} /> },
       { name: "Git", icon: <Terminal size={20} /> },
-        { name: "Docker", icon: <HardDrive size={20} /> },
-      
+      { name: "Docker", icon: <HardDrive size={20} /> },
+
     ],
     Learning: [
       { name: "AI / ML", icon: <Zap size={20} /> },
