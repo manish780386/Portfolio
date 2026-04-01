@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #04050e;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #6366f1);
+  border-radius: 99px;
+}
+ 
+/* ─── SELECTION ─── */
+::selection {
+  background: rgba(6, 182, 212, 0.2);
+  color: #fff;
+}
+ 
+/* ─── SMOOTH SCROLL ─── */
+html {
+  scroll-behavior: smooth;
+}
+ 
+/* ─── BODY ─── */
+body {
+  background-color: #04050e;
+  color: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+ 
+/* ─── HIDE DEFAULT CURSOR ─── */
+* {
+  cursor: none !important;
+}
+ 
+/* ─── GLOW UTILITIES ─── */
+@layer utilities {
+  .glow-cyan {
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.25);
+  }
+  .glow-indigo {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+  }
+}
+ 
+/* ─── FOCUS VISIBLE ─── */
+:focus-visible {
+  outline: 2px solid rgba(6, 182, 212, 0.5);
+  outline-offset: 2px;
+}
+ 
+/* ─── SECTION DIVIDER ─── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent);
+}
