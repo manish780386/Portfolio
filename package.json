@@ -14,9 +14,14 @@
     "framer-motion": "^12.24.10",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
+    "react-circular-progressbar": "^2.2.0",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.11.0",
-    "react-scroll": "^1.9.3"
+    "react-hot-toast": "^2.6.0",
+    "react-intersection-observer": "^10.0.3",
+    "react-router-dom": "^7.13.2",
+    "react-scroll": "^1.9.3",
+    "tsparticles": "^3.9.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
