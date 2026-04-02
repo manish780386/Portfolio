@@ -7,7 +7,7 @@ const SOCIALS = [
   { icon: <Github size={18} />, url: "https://github.com/manish780386", label: "GitHub" },
   { icon: <Linkedin size={18} />, url: "https://www.linkedin.com/in/manish-dange-2a03b6312/", label: "LinkedIn" },
   { icon: <Codepen size={18} />, url: "https://leetcode.com/u/dangemanish/", label: "LeetCode" },
-  { icon: <Mail size={18} />, url: "mailto:dangemanish780386@gmail.com", label: "Email" },
+  { icon: <Mail size={18} />, url: "mailto:dangemanish35@gmail.com", label: "Email" },
 ];
 
 const QUICK_LINKS = [

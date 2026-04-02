@@ -1,16 +1,16 @@
 import React from "react";
-import ParticleField from "../components/ParticleField.jsx";
-import Hero from "../sections/Hero.jsx";
-import Stats from "../sections/Stats.jsx";
-import About from "../sections/About.jsx";
-import GithubStats from "../sections/GithubStats.jsx";
-import LeetCodeStats from "../sections/LeetCodeStats.jsx";
-import Experience from "../sections/Experience.jsx";
-import Certifications from "../sections/Certifications.jsx";
-import Projects from "../sections/Projects.jsx";
-import Skills from "../sections/Skills.jsx";
-import Contact from "../sections/Contact.jsx";
-import Footer from "../components/Footer.jsx";
+import ParticleField from "../components/ParticleField";
+import Hero from "../sections/Hero";
+import Stats from "../sections/Stats";
+import About from "../sections/About";
+import GithubStats from "../sections/GithubStats";
+import LeetCodeStats from "../sections/LeetCodeStats";
+import Experience from "../sections/Experience";
+import Certifications from "../sections/Certifications";
+import Projects from "../sections/Projects";
+import Skills from "../sections/Skills";
+import Contact from "../sections/Contact";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (

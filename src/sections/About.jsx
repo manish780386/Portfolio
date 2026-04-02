@@ -77,7 +77,7 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
               {[
                 { icon: <MapPin size={15} />, label: "Location", value: "Indore, MP, India" },
-                { icon: <Mail size={15} />, label: "Email", value: "dangemanish780386@gmail.com", small: true },
+                { icon: <Mail size={15} />, label: "Email", value: "dangemanish35@gmail.com", small: true },
                 { icon: <Activity size={15} />, label: "Status", value: "Available 🟢" },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
