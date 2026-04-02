@@ -44,7 +44,7 @@ export default function Contact() {
 
             <div className="space-y-3 mb-8">
               {[
-                { icon: <Mail size={16} />, label: "Email", value: "dangemanish780386@gmail.com" },
+                { icon: <Mail size={16} />, label: "Email", value: "dangemanish35@gmail.com" },
                 { icon: <MapPin size={16} />, label: "Location", value: "Indore, MP, India" },
                 { icon: <Activity size={16} />, label: "Status", value: "Available for Work 🟢" },
               ].map((item, i) => (
