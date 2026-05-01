@@ -13,12 +13,12 @@ import CountUp from "react-countup";
 const LC = {
   username:       "dangemanish",
   profileUrl:     "https://leetcode.com/u/dangemanish/",
-  totalSolved:    51,
-  easy:           28,
-  medium:         18,
-  hard:           5,
-  acceptanceRate: "67.4%",
-  streak:         7,
+  totalSolved:    59,
+  easy:           43,
+  medium:         15,
+  hard:           1,
+  acceptanceRate: "56.8%",
+  streak:         13,
   ranking:        "~500k",
   contestRating:  "—",
 };
