@@ -63,13 +63,7 @@ const PUBLISHED = [
   },
 ];
 
-/* ══════════════════════════════════════════════════
-   PROJECTS
-   screenshot: put your image in public/screenshots/
-   e.g. public/screenshots/portfolio.png
-   then set screenshot: "/screenshots/portfolio.png"
-   Leave screenshot: null to show no image
-══════════════════════════════════════════════════ */
+
 const PROJECTS = [
   {
     id: 1, name: "Portfolio Website", emoji: "🖥️",
@@ -381,17 +375,7 @@ export default function Projects() {
             <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
           </div>
 
-          {/* HOW TO ADD SCREENSHOTS */}
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-            className="mb-8 p-4 rounded-xl bg-cyan-500/[0.05] border border-cyan-500/20">
-            <p className="text-cyan-400 text-xs font-bold mb-2">📸 How to add screenshots:</p>
-            <ol className="text-gray-500 text-xs space-y-1 list-decimal list-inside">
-              <li>Take a screenshot of your project (any tool)</li>
-              <li>Save it in <code className="text-cyan-400 bg-black/30 px-1 rounded">public/screenshots/</code> folder</li>
-              <li>In <code className="text-cyan-400 bg-black/30 px-1 rounded">Projects.jsx</code>, update the <code className="text-cyan-400 bg-black/30 px-1 rounded">screenshot</code> field</li>
-              <li>Example: <code className="text-green-400 bg-black/30 px-1 rounded">screenshot: "/screenshots/portfolio.png"</code></li>
-            </ol>
-          </motion.div>
+          
 
           {/* FILTERS */}
           <div className="flex flex-wrap gap-2 mb-8">
