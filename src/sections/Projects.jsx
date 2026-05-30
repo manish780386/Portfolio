@@ -35,7 +35,7 @@ const PUBLISHED = [
     icon: "🎨",
     stats: [
       { label: "Installs", val: "8+",    icon: <Download size={13} /> },
-      { label: "Version",  val: "1.0.0", icon: <Zap size={13} /> },
+      { label: "Version",  val: "1.0.3", icon: <Zap size={13} /> },
       { label: "Rating",   val: "4.0 ★", icon: <Star size={13} /> },
     ],
     tags: ["TypeScript", "VS Code", "Syntax Highlighting", "15+ Languages"],
@@ -84,7 +84,7 @@ const PROJECTS = [
     githubUrl: "https://github.com/manish780386",
     category: "Django", featured: true,
     color: "from-indigo-500 to-purple-500", accentColor: "#6366f1",
-    screenshot: null, // "/screenshots/svvv-notes.png"
+    screenshot: "/screenshots/svvv.png", // "/screenshots/svvv-notes.png"
   },
   {
     id: 3, name: "E-Commerce Platform", emoji: "🛒",
