@@ -74,7 +74,7 @@ const PROJECTS = [
     category: "React", featured: true,
     color: "from-cyan-500 to-indigo-500", accentColor: "#06b6d4",
     // ↓ Put your screenshot in public/screenshots/portfolio.png
-    screenshot: null, // e.g. "/screenshots/portfolio.png"
+    screenshot: "/screenshots/portfilo.png", // e.g. "/screenshots/portfolio.png"
   },
   {
     id: 2, name: "SVVV Notes Website", emoji: "📚",
