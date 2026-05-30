@@ -19,7 +19,7 @@ const PUBLISHED = [
     icon: "🌳",
     name: "JSON Tree Visualizer",
     sub: "VS Code Extension",
-    num: 37,
+    num: 39,
     suffix: "+",
     metric: "Installs",
     color: "from-emerald-400 to-cyan-500",
