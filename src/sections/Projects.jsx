@@ -17,7 +17,7 @@ const PUBLISHED = [
     desc: "Instantly turn any JSON into an interactive tree, mind-map graph, diff view, API client, and format converter — all without leaving your editor.",
     icon: "🌳",
     stats: [
-      { label: "Installs", val: "39+",   icon: <Download size={13} /> },
+      { label: "Installs", val: "50+",   icon: <Download size={13} /> },
       { label: "Version",  val: "1.0.0", icon: <Zap size={13} /> },
       { label: "Rating",   val: "5.0 ★", icon: <Star size={13} /> },
     ],
