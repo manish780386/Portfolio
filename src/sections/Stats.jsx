@@ -9,7 +9,7 @@ const STATS = [
   { num: 10,  suffix: "+", label: "Certifications",    icon: "🏆", color: "from-indigo-500 to-purple-500" },
   { num: 3,   suffix: "+", label: "Years Learning",    icon: "📚", color: "from-green-500 to-teal-500"   },
   { num: 400, suffix: "+", label: "GitHub Commits",    icon: "💻", color: "from-pink-500 to-rose-500"    },
-  { num: 50,  suffix: "+", label: "DSA Solved",        icon: "🧩", color: "from-yellow-500 to-orange-500"},
+  { num: 100,  suffix: "+", label: "DSA Solved",        icon: "🧩", color: "from-yellow-500 to-orange-500"},
   { num: 1,   suffix: "",  label: "Internships",       icon: "💼", color: "from-blue-500 to-cyan-500"    },
 ];
 
