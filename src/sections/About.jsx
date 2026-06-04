@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Activity, ExternalLink } from "lucide-react";
 import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
+import manish from "../assets/manish.png";
 
 const SKILLS = [
   { name: "Python", color: "bg-blue-500/20 text-blue-300 border-blue-500/20" },
@@ -36,8 +37,7 @@ export default function About() {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 rounded-3xl blur-2xl" />
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-cyan-900/40 to-indigo-900/40 flex items-center justify-center">
-                <span className="text-8xl">👨‍💻</span>
-                {/* Replace above with: <img src={image1} className="w-full h-full object-cover" alt="Manish" /> */}
+              <img src={manish} className="w-full h-full object-cover" alt="Manish" />
               </div>
               {/* FLOATING CARDS */}
               <motion.div

@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import { Github, ArrowDown, Sparkles, Code2, Shield, Star, GitFork } from "lucide-react";
 // ── REPLACE THIS with your real photo import:
 // import myPhoto from "../assets/photo.jpg";
+import manish from "../assets/manish.png";
 
 /* ─── TYPEWRITER ─── */
 function Typewriter({ texts, speed = 75 }) {
@@ -250,21 +251,17 @@ export default function Hero() {
               {/* AVATAR — swap emoji div with <img> tag below when you have your photo */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-4">
 
-                {/* ╔══════════════════════════════════╗
-                    ║  YOUR PHOTO GOES HERE             ║
-                    ║  Replace this div with:           ║
-                    ║  <img                             ║
-                    ║    src={myPhoto}                  ║
-                    ║    alt="Manish"                   ║
-                    ║    className="w-24 h-24           ║
-                    ║      rounded-2xl object-cover     ║
-                    ║      border border-white/10       ║
-                    ║      shadow-xl"                   ║
-                    ║  />                               ║
-                    ╚══════════════════════════════════╝ */}
+               
                 <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20
                   border border-white/10 flex items-center justify-center shadow-xl text-5xl">
-                  👨‍💻
+                  <img                             
+                        src={manish}                  
+                        alt="Manish"                   
+                       className="w-24 h-24           
+                         rounded-2xl object-cover     
+                         border border-white/10       
+                         shadow-xl"                   
+                      /> 
                 </div>
 
                 <div className="text-center">
