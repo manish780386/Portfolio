@@ -12,7 +12,7 @@ const ME = {
   name:     "Manish Dange",
   title:    "Full Stack Developer & Cyber Security Enthusiast",
   email:    "dangemanish35@gmail.com",
-  phone:    "+91 7903861195",
+  phone:    "+91 7803861195",
   city:     "Indore, Madhya Pradesh, India",
   github:   "github.com/manish780386",
   linkedin: "linkedin.com/in/manish-dange-2a03b6312",
@@ -21,7 +21,7 @@ const ME = {
     "Passionate Full Stack Developer and Cyber Security enthusiast pursuing B.Tech CSE at SVVV Indore. " +
     "Specialized in building scalable web applications with React, Django, and Python. " +
     "Experienced in AI/ML integration, REST APIs, and real-time features. " +
-    "Actively solving DSA problems on LeetCode (50+ solved) and contributing to open-source.",
+    "Actively solving DSA problems on LeetCode (1000+ solved) and contributing to open-source.",
 };
 
 const EDUCATION = [
@@ -52,18 +52,7 @@ const EXPERIENCE = [
     ],
     tags: ["React", "Django", "PostgreSQL", "REST API", "Python"],
   },
-  {
-    title:   "Web Development Intern",
-    company: "Cod Soft",
-    period:  "2023 – 2024",
-    type:    "Internship",
-    points: [
-      "Frontend development with React and JavaScript using responsive Tailwind CSS layouts.",
-      "Built reusable component library that reduced development time by 25%.",
-      "Improved Core Web Vitals and page-load performance across multiple projects.",
-    ],
-    tags: ["React", "JavaScript", "Tailwind CSS", "HTML/CSS"],
-  },
+  
 ];
 
 const PROJECTS = [
@@ -190,9 +179,9 @@ export default function ResumePage() {
               <div className="flex gap-2 flex-wrap shrink-0">
                 {[
                   { label: "Projects",    val: "20+", col: "text-cyan-400   bg-cyan-500/15   border-cyan-500/25"   },
-                  { label: "DSA Solved",  val: "50+", col: "text-yellow-400 bg-yellow-500/15 border-yellow-500/25" },
+                  { label: "DSA Solved",  val: "100+", col: "text-yellow-400 bg-yellow-500/15 border-yellow-500/25" },
                   { label: "Certs",       val: "8+",  col: "text-indigo-400 bg-indigo-500/15 border-indigo-500/25" },
-                  { label: "Internships", val: "2",   col: "text-green-400  bg-green-500/15  border-green-500/25"  },
+                  { label: "Internships", val: "1",   col: "text-green-400  bg-green-500/15  border-green-500/25"  },
                 ].map((b, i) => (
                   <motion.div key={i}
                     initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}

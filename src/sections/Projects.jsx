@@ -120,11 +120,11 @@ const PROJECTS = [
     id: 6, name: "KisanMitra", emoji: "🌾",
     desc: "Smart farmer assistant — market prices, produce selling, buyer-farmer connections, and crop advisory.",
     tech: ["React", "TypeScript", "Tailwind"],
-    liveUrl: "https://github.com/manish780386/-KisanMitra",
+    liveUrl: "https://kisanmitra-six.vercel.app/",
     githubUrl: "https://github.com/manish780386/-KisanMitra",
     githubOnly: true, category: "TypeScript", featured: true,
     color: "from-lime-500 to-green-500", accentColor: "#84cc16",
-    screenshot: null, // "/screenshots/kisanmitra.png"
+    screenshot: "/screenshots/kisan.png", // "/screenshots/kisanmitra.png"
   },
   {
     id: 7, name: "LIC Agent Website", emoji: "🏢",

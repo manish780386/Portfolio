@@ -105,8 +105,8 @@ export default function Hero() {
   const STATS = [
     { icon: <Code2 size={14} className="text-cyan-400" />,   val: "20+",  label: "Projects" },
     { icon: <Star size={14} className="text-yellow-400" />,  val: "13+",  label: "Stars" },
-    { icon: <GitFork size={14} className="text-indigo-400" />, val: "200+", label: "Commits" },
-    { icon: <Shield size={14} className="text-green-400" />, val: "50+",  label: "DSA" },
+    { icon: <GitFork size={14} className="text-indigo-400" />, val: "400+", label: "Commits" },
+    { icon: <Shield size={14} className="text-green-400" />, val: "100+",  label: "DSA" },
   ];
 
   return (

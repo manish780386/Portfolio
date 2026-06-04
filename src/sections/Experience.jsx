@@ -14,16 +14,7 @@ const EXPERIENCE = [
     color: "from-cyan-500 to-indigo-500",
     dot: "#06b6d4",
   },
-  {
-    title: "Web Development Intern",
-    org: "Cod Soft",
-    time: "2023 – 2024",
-    type: "Past",
-    desc: "Frontend development using React and JavaScript. Built reusable UI component library, improved page load times, and collaborated in agile sprints.",
-    tags: ["React", "JavaScript", "CSS", "UI/UX"],
-    color: "from-pink-500 to-purple-500",
-    dot: "#ec4899",
-  },
+  
 ];
 
 const EDUCATION = [
