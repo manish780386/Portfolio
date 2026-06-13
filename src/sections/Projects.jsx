@@ -94,7 +94,7 @@ const PROJECTS = [
     githubUrl: "https://github.com/manish780386",
     category: "Django", featured: false,
     color: "from-pink-500 to-rose-500", accentColor: "#ec4899",
-    screenshot: null, // "/screenshots/ecommerce.png"
+    screenshot: "/screenshots/ecommerce.png", // "/screenshots/ecommerce.png"
   },
   {
     id: 4, name: "JobSt@ck", emoji: "📋",
@@ -104,7 +104,7 @@ const PROJECTS = [
     githubUrl: "https://github.com/manish780386/JobStack",
     githubOnly: true, category: "Django", featured: true,
     color: "from-green-500 to-teal-500", accentColor: "#22c55e",
-    screenshot: null, // "/screenshots/jobstack.png"
+    screenshot: "/screenshots/job.png", // "/screenshots/jobstack.png"
   },
   {
     id: 5, name: "Velvet Brew Café", emoji: "☕",
@@ -114,7 +114,7 @@ const PROJECTS = [
     githubUrl: "https://github.com/manish780386/Velvet-Brew-Cafe-Website",
     githubOnly: true, category: "React", featured: false,
     color: "from-amber-500 to-orange-500", accentColor: "#f59e0b",
-    screenshot: null, // "/screenshots/velvet-brew.png"
+    screenshot: "/screenshots/velevet.png", // "/screenshots/velvet-brew.png"
   },
   {
     id: 6, name: "KisanMitra", emoji: "🌾",
@@ -134,7 +134,7 @@ const PROJECTS = [
     githubUrl: "https://github.com/manish780386",
     category: "Django", featured: false,
     color: "from-blue-500 to-cyan-500", accentColor: "#3b82f6",
-    screenshot: null, // "/screenshots/lic-agent.png"
+    screenshot: "/screenshots/lic.png", // "/screenshots/lic-agent.png"
   },
 ];
 
