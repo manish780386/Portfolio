@@ -9,7 +9,7 @@ const STATS = [
   { num: 10,  suffix: "+", label: "Certifications",    icon: "🏆", color: "from-indigo-500 to-purple-500" },
   { num: 3,   suffix: "+", label: "Years Learning",    icon: "📚", color: "from-green-500 to-teal-500"   },
   { num: 400, suffix: "+", label: "GitHub Commits",    icon: "💻", color: "from-pink-500 to-rose-500"    },
-  { num: 100,  suffix: "+", label: "DSA Solved",        icon: "🧩", color: "from-yellow-500 to-orange-500"},
+  { num: 500,  suffix: "+", label: "DSA Solved",        icon: "🧩", color: "from-yellow-500 to-orange-500"},
   { num: 1,   suffix: "",  label: "Internships",       icon: "💼", color: "from-blue-500 to-cyan-500"    },
 ];
 
@@ -19,7 +19,7 @@ const PUBLISHED = [
     icon: "🌳",
     name: "JSON Tree Visualizer",
     sub: "VS Code Extension",
-    num: 50,
+    num: 93,
     suffix: "+",
     metric: "Installs",
     color: "from-emerald-400 to-cyan-500",
@@ -30,7 +30,7 @@ const PUBLISHED = [
     icon: "🎨",
     name: "Operator Colorizer Pro",
     sub: "VS Code Extension",
-    num: 8,
+    num: 11,
     suffix: "+",
     metric: "Installs",
     color: "from-orange-400 to-pink-500",
