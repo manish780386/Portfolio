@@ -16,7 +16,7 @@ const USERNAME = "manish780386";
 const GH_URL   = `https://github.com/${USERNAME}`;
 
 const STATS = [
-  { label: "Public Repos",   value: 38,   suffix: "",  icon: <GitBranch size={16} />, color: "from-cyan-500 to-blue-500"    },
+  { label: "Public Repos",   value: 40,   suffix: "",  icon: <GitBranch size={16} />, color: "from-cyan-500 to-blue-500"    },
   { label: "Stars Earned",   value: 8,    suffix: "+", icon: <Star size={16} />,      color: "from-yellow-500 to-orange-500" },
   { label: "Followers",      value: 2,    suffix: "",  icon: <Users size={16} />,     color: "from-pink-500 to-rose-500"    },
   { label: "Total Commits",  value: 400,  suffix: "+", icon: <GitCommit size={16} />, color: "from-indigo-500 to-purple-500" },
