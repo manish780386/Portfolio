@@ -315,20 +315,7 @@ export default function Hero() {
                 {/* DIVIDER */}
                 <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-4" />
 
-                {/* TECH PILLS */}
-                <div className="flex flex-wrap justify-center gap-1.5 mb-5 px-2">
-                  {["React", "Django", "Python", "TypeScript", "Tailwind"].map((t, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1.2 + i * 0.08 }}
-                      className="px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] rounded-full text-[10px] text-gray-400 hover:text-cyan-400 hover:border-cyan-400/30 transition cursor-default"
-                    >
-                      {t}
-                    </motion.span>
-                  ))}
-                </div>
+               
 
                 {/* SOCIAL LINKS ROW */}
                 <div className="flex gap-2 mb-5">
