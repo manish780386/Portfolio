@@ -318,7 +318,7 @@ export default function GithubStats() {
             whileHover={{ scale: 1.04, boxShadow: "0 0 30px rgba(6,182,212,0.2)" }}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cyan-500/25 text-sm text-gray-400 hover:text-cyan-400 hover:border-cyan-500/50 transition"
           >
-            <Github size={15} /> View All 38 Repositories →
+            <Github size={15} /> View All  Repositories →
           </motion.a>
         </div>
       </div>

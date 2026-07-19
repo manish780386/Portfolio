@@ -69,7 +69,7 @@ export default function Sidebar() {
             <p className="text-sm font-black bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent leading-none">
               manish.dev
             </p>
-            <p className="text-[10px] text-gray-600 mt-0.5">Full Stack Dev</p>
+            
           </div>
         )}
       </div>

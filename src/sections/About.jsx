@@ -4,20 +4,7 @@ import { Mail, MapPin, Activity, ExternalLink } from "lucide-react";
 import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
 import manish from "../assets/manish.png";
 
-const SKILLS = [
-  { name: "Python", color: "bg-blue-500/20 text-blue-300 border-blue-500/20" },
-  { name: "React", color: "bg-cyan-500/20 text-cyan-300 border-cyan-500/20" },
-  { name: "TypeScript", color: "bg-blue-400/20 text-blue-300 border-blue-400/20" },
-  { name: "Django", color: "bg-green-500/20 text-green-300 border-green-500/20" },
-  { name: "React Native", color: "bg-purple-500/20 text-purple-300 border-purple-500/20" },
-  { name: "Next.js", color: "bg-gray-400/20 text-gray-300 border-gray-400/20" },
-  { name: "Cyber Security", color: "bg-red-500/20 text-red-300 border-red-500/20" },
-  { name: "SQL", color: "bg-yellow-500/20 text-yellow-300 border-yellow-500/20" },
-  { name: "Tailwind", color: "bg-teal-500/20 text-teal-300 border-teal-500/20" },
-  { name: "JavaScript", color: "bg-yellow-400/20 text-yellow-200 border-yellow-400/20" },
-  { name: "Docker", color: "bg-indigo-500/20 text-indigo-300 border-indigo-500/20" },
-  { name: "Git", color: "bg-orange-500/20 text-orange-300 border-orange-500/20" },
-];
+
 
 export default function About() {
   return (
@@ -90,21 +77,7 @@ export default function About() {
               ))}
             </div>
 
-            <h3 className="text-sm font-semibold text-white mb-3 uppercase tracking-widest">Tech Stack</h3>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.map((s, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.04 }}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className={`px-3 py-1.5 rounded-lg border text-xs font-medium cursor-default ${s.color}`}
-                >
-                  {s.name}
-                </motion.span>
-              ))}
-            </div>
+            
           </motion.div>
         </div>
       </div>

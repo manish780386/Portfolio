@@ -107,14 +107,7 @@ export default function Hero() {
     "Problem Solver 🧩",
   ];
 
-  const TECH = [
-    { name: "React",          color: "text-cyan-400",  bg: "bg-cyan-500/10 border-cyan-500/20"   },
-    { name: "Django",         color: "text-green-400", bg: "bg-green-500/10 border-green-500/20" },
-    { name: "Python",         color: "text-blue-400",  bg: "bg-blue-500/10 border-blue-500/20"   },
-    { name: "TypeScript",     color: "text-blue-300",  bg: "bg-blue-400/10 border-blue-400/20"   },
-    { name: "Tailwind",       color: "text-teal-400",  bg: "bg-teal-500/10 border-teal-500/20"   },
-    { name: "Cyber Security", color: "text-red-400",   bg: "bg-red-500/10 border-red-500/20"     },
-  ];
+  
 
   const STATS = [
     { icon: <Code2 size={14} className="text-cyan-400" />,    val: "20+",  label: "Projects" },
@@ -310,7 +303,7 @@ export default function Hero() {
 
                 {/* NAME */}
                 <p className="text-white font-black text-xl tracking-tight mb-0.5">Manish Dange</p>
-                <p className="text-cyan-400 text-[11px] font-semibold tracking-wide mb-1">Full Stack Dev · SVVV Indore</p>
+               
 
                 {/* DIVIDER */}
                 <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-4" />
@@ -367,17 +360,7 @@ export default function Hero() {
       </motion.div>
 
       {/* ── TECH PILLS ── */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1 }}
-        className="relative z-10 flex flex-wrap justify-center gap-2 mt-10 px-6">
-        {TECH.map((t, i) => (
-          <motion.span key={i}
-            initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.1 + i * 0.07 }} whileHover={{ scale: 1.1, y: -3 }}
-            className={`px-3 py-1.5 rounded-full border text-xs font-semibold ${t.color} ${t.bg} cursor-default`}>
-            {t.name}
-          </motion.span>
-        ))}
-      </motion.div>
+      
 
       {/* ── SCROLL INDICATOR ── */}
       <motion.div

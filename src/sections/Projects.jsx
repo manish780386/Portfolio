@@ -66,58 +66,17 @@ const PUBLISHED = [
 
 const PROJECTS = [
   {
-    id: 1, name: "Portfolio Website", emoji: "🖥️",
-    desc: "Modern animated portfolio with smooth scroll, dark UI, particle effects, 3D tilt card, and interactive sections.",
-    tech: ["React", "Tailwind", "Framer Motion", "React Router"],
-    liveUrl: "https://manish-portfolio.vercel.app",
-    githubUrl: "https://github.com/manish780386",
-    category: "React", featured: true,
-    color: "from-cyan-500 to-indigo-500", accentColor: "#06b6d4",
-    // ↓ Put your screenshot in public/screenshots/portfolio.png
-    screenshot: "/screenshots/portfilo.png", // e.g. "/screenshots/portfolio.png"
-  },
-  {
-    id: 2, name: "SVVV Notes Website", emoji: "📚",
+    id: 1, name: "SVVV Notes Website", emoji: "📚",
     desc: "Student platform for quality notes access with auth, file management, and admin controls. Used by 100+ students.",
     tech: ["React", "Django", "SQL", "Python"],
     liveUrl: "https://svvv-notes-website-poij.vercel.app/",
     githubUrl: "https://github.com/manish780386",
-    category: "Django", featured: true,
+    category: "React", featured: true,
     color: "from-indigo-500 to-purple-500", accentColor: "#6366f1",
     screenshot: "/screenshots/svvv.png", // "/screenshots/svvv-notes.png"
   },
   {
-    id: 3, name: "E-Commerce Platform", emoji: "🛒",
-    desc: "Full-stack shopping platform with product catalog, cart, payment integration, and real-time inventory updates.",
-    tech: ["React", "Django", "SQL", "Tailwind"],
-    liveUrl: "https://simple-e-commerce-website-beta.vercel.app/",
-    githubUrl: "https://github.com/manish780386",
-    category: "Django", featured: false,
-    color: "from-pink-500 to-rose-500", accentColor: "#ec4899",
-    screenshot: "/screenshots/ecommerce.png", // "/screenshots/ecommerce.png"
-  },
-  {
-    id: 4, name: "JobSt@ck", emoji: "📋",
-    desc: "Full-featured job portal — search, apply, track applications, resume builder, premium services & admin posting.",
-    tech: ["React", "Django", "Python", "SQL"],
-    liveUrl: "https://github.com/manish780386/JobStack",
-    githubUrl: "https://github.com/manish780386/JobStack",
-    githubOnly: true, category: "Django", featured: true,
-    color: "from-green-500 to-teal-500", accentColor: "#22c55e",
-    screenshot: "/screenshots/job.png", // "/screenshots/jobstack.png"
-  },
-  {
-    id: 5, name: "Velvet Brew Café", emoji: "☕",
-    desc: "Stunning café website with online ordering, reservation system, 3D elements, and full admin panel.",
-    tech: ["React", "Django", "Framer Motion", "Three.js"],
-    liveUrl: "https://github.com/manish780386/Velvet-Brew-Cafe-Website",
-    githubUrl: "https://github.com/manish780386/Velvet-Brew-Cafe-Website",
-    githubOnly: true, category: "React", featured: false,
-    color: "from-amber-500 to-orange-500", accentColor: "#f59e0b",
-    screenshot: "/screenshots/velevet.png", // "/screenshots/velvet-brew.png"
-  },
-  {
-    id: 6, name: "KisanMitra", emoji: "🌾",
+    id: 2, name: "KisanMitra", emoji: "🌾",
     desc: "Smart farmer assistant — market prices, produce selling, buyer-farmer connections, and crop advisory.",
     tech: ["React", "TypeScript", "Tailwind"],
     liveUrl: "https://kisanmitra-six.vercel.app/",
@@ -127,12 +86,12 @@ const PROJECTS = [
     screenshot: "/screenshots/kisan.png", // "/screenshots/kisanmitra.png"
   },
   {
-    id: 7, name: "LIC Agent Website", emoji: "🏢",
+    id: 3, name: "LIC Agent Website", emoji: "🏢",
     desc: "Enterprise CRM for LIC agents — client management, policy tracking, and sales analytics. 6+ months in production.",
     tech: ["React", "Django", "Tailwind", "SQL"],
     liveUrl: "https://santosh-gayakwad-lic.vercel.app/",
     githubUrl: "https://github.com/manish780386",
-    category: "Django", featured: false,
+    category: "React", featured: false,
     color: "from-blue-500 to-cyan-500", accentColor: "#3b82f6",
     screenshot: "/screenshots/lic.png", // "/screenshots/lic-agent.png"
   },
