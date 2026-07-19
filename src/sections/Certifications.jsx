@@ -17,7 +17,7 @@ const CERTS = [
     color: "from-blue-500 to-indigo-500",
     glow: "#6366f1",
     year: "2024",
-    grade: "Elite",
+    grade: "Completed",
     desc: "Covered IoT architecture, protocols, smart devices, and real-world applications through IIT faculty-led coursework.",
     image: "../public/certification/iot.png",            // e.g. "/certs/nptel-iot.jpg"
     verifyUrl: "../public/certification/iot.png",
@@ -30,7 +30,7 @@ const CERTS = [
     color: "from-green-500 to-teal-500",
     glow: "#14b8a6",
     year: "2024",
-    grade: "Elite",
+    grade: "Completed",
     desc: "Developed communication, teamwork, leadership, and professional etiquette skills through structured exercises.",
     image: null,
     verifyUrl: "#",

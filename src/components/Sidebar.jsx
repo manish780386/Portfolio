@@ -166,13 +166,7 @@ export default function Sidebar() {
           </NavLink>
         )}
 
-        {/* AVAILABILITY */}
-        {(!collapsed || mobile) && (
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-green-500/[0.07] border border-green-500/15">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
-            <span className="text-green-400 text-[11px] font-medium">Available for work</span>
-          </div>
-        )}
+        
 
         {/* COLLAPSE TOGGLE (desktop) */}
         <button

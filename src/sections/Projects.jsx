@@ -17,7 +17,7 @@ const PUBLISHED = [
     desc: "Instantly turn any JSON into an interactive tree, mind-map graph, diff view, API client, and format converter — all without leaving your editor.",
     icon: "🌳",
     stats: [
-      { label: "Installs", val: "93+",   icon: <Download size={13} /> },
+      { label: "Installs", val: "100+",   icon: <Download size={13} /> },
       { label: "Version",  val: "1.0.0", icon: <Zap size={13} /> },
       { label: "Rating",   val: "5.0 ★", icon: <Star size={13} /> },
     ],
@@ -34,7 +34,7 @@ const PUBLISHED = [
     desc: "Highlights arithmetic, comparison, logical, assignment, and bitwise operators with distinct colors across 15+ languages. Toggle on/off from the status bar.",
     icon: "🎨",
     stats: [
-      { label: "Installs", val: "11+",    icon: <Download size={13} /> },
+      { label: "Installs", val: "13+",    icon: <Download size={13} /> },
       { label: "Version",  val: "1.0.3", icon: <Zap size={13} /> },
       { label: "Rating",   val: "4.0 ★", icon: <Star size={13} /> },
     ],

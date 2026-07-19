@@ -179,7 +179,6 @@ export default function ResumePage() {
               <div className="flex gap-2 flex-wrap shrink-0">
                 {[
                   { label: "Projects",    val: "20+", col: "text-cyan-400   bg-cyan-500/15   border-cyan-500/25"   },
-                  { label: "DSA Solved",  val: "100+", col: "text-yellow-400 bg-yellow-500/15 border-yellow-500/25" },
                   { label: "Certs",       val: "8+",  col: "text-indigo-400 bg-indigo-500/15 border-indigo-500/25" },
                   { label: "Internships", val: "1",   col: "text-green-400  bg-green-500/15  border-green-500/25"  },
                 ].map((b, i) => (
