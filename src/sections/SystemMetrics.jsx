@@ -13,7 +13,7 @@ import { Radio } from "lucide-react";
 */
 const METRICS = [
   {
-    value: 240, suffix: "+", label: "DSA Problems Solved",
+    value: 500, suffix: "+", label: "DSA Problems Solved",
     detail: "Across LeetCode, HackerRank, CodeChef, GeeksforGeeks & Codeforces.",
   },
   {
@@ -25,7 +25,7 @@ const METRICS = [
     detail: "\"JSON Tree Visualizer Pro\" — live on the Marketplace.",
   },
   {
-    value: 400, suffix: "+", label: "GitHub Commits",
+    value: 450, suffix: "+", label: "GitHub Commits",
     detail: "Shipped across 40 public repositories.",
   },
 ];

@@ -1,21 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
-import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import manish from "../assets/manish.png";
 
-const STATS = [
-  { val: 20,  suffix: "+", label: "Projects built" },
-  { val: 240, suffix: "+", label: "DSA problems solved" },
-  { val: 10,  suffix: "+", label: "Certifications" },
-  { val: 1,   suffix: "",  label: "Active internship" },
+const READOUT_LINES = [
+  { key: "role", value: '"Full-Stack Developer"' },
+  { key: "focus", value: '"Cyber Security"' },
+  { key: "stack", value: '["React", "Django", "PostgreSQL"]' },
+  { key: "currently_building", value: '"AI ticketing assistant"' },
+  { key: "dsa_problems_solved", value: "500+" },
+  { key: "status", value: '"open_to_work"' },
 ];
 
-export default function About() {
+/* Terminal-style readout — line-by-line reveal with a blinking cursor at
+   the end, instead of generic vanity-metric cards. */
+function TerminalReadout() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [shown, setShown] = useState(0);
 
+  useEffect(() => {
+    if (!inView) return;
+    if (shown >= READOUT_LINES.length) return;
+    const t = setTimeout(() => setShown((s) => s + 1), 220);
+    return () => clearTimeout(t);
+  }, [inView, shown]);
+
+  return (
+    <div ref={ref} className="rounded-xl overflow-hidden border border-white/[0.08] bg-[#0a0f17]">
+      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-white/[0.06] bg-white/[0.02]">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#f2545b]/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#f5b942]/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#34d399]/70" />
+        <span className="ml-3 font-mono-label text-[10px] text-[#4b5768]">whoami.json</span>
+      </div>
+      <div className="p-5 font-mono text-[12.5px] leading-[1.9]">
+        <p className="text-[#4b5768]">$ whoami --verbose</p>
+        <p className="text-[#c7d0dc]">{"{"}</p>
+        {READOUT_LINES.map((line, i) => (
+          <motion.p
+            key={line.key}
+            initial={{ opacity: 0, x: -8 }}
+            animate={shown > i ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.3 }}
+            className="pl-4"
+          >
+            <span className="text-[#60a5fa]">"{line.key}"</span>
+            <span className="text-[#4b5768]">: </span>
+            <span className="text-[#34d399]">{line.value}</span>
+            {i < READOUT_LINES.length - 1 && <span className="text-[#c7d0dc]">,</span>}
+          </motion.p>
+        ))}
+        <p className="text-[#c7d0dc]">
+          {"}"}
+          {shown >= READOUT_LINES.length && (
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ repeat: Infinity, duration: 0.9 }}
+              className="inline-block w-2 h-3.5 bg-[#34d399] ml-1 align-middle"
+            />
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default function About() {
   return (
     <SectionWrapper id="about" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
@@ -72,16 +124,7 @@ export default function About() {
               and algorithms.
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" ref={ref}>
-              {STATS.map((s, i) => (
-                <div key={i} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] text-center">
-                  <div className="text-xl font-bold text-white font-mono-label">
-                    {inView ? <CountUp end={s.val} duration={1.6} suffix={s.suffix} /> : `0${s.suffix}`}
-                  </div>
-                  <div className="text-[10px] text-[#7c8aa0] mt-1 leading-tight">{s.label}</div>
-                </div>
-              ))}
-            </div>
+            <TerminalReadout />
           </motion.div>
         </div>
       </div>

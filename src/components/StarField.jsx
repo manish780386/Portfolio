@@ -1,16 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-/*
-  StarField — deep space background.
-  - 4 layered star depths -> parallax-ish twinkle speed
-  - Two soft nebula blobs (green/blue) that drift very slowly
-  - Rare meteor streaks for the "alive" feeling
-  - A moon, a distant sun-glow, and two small ringed planets (CSS, not canvas —
-    cheap to render and easy to keep still-readable behind foreground content)
-  Kept star rendering on a single canvas for performance instead of hundreds
-  of DOM nodes.
-*/
 
 function Moon() {
   return (

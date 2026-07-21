@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import StarField from "./components/StarField";
 import Sidebar from "./components/Sidebar";
 import BackToTop from "./components/BackToTop";
 import Home from "./pages/Home";
@@ -14,6 +15,12 @@ function Layout() {
 
   return (
     <div className="bg-[#060a11] text-white overflow-x-hidden font-sans flex min-h-screen">
+      {/*
+        Rendered once here (not inside Home.jsx) so it stays behind every
+        route — /projects and /resume used to lose the space background
+        entirely on navigation since only Home.jsx mounted it before.
+      */}
+      <StarField />
       <Sidebar />
 
       {/*
