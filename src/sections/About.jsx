@@ -1,83 +1,87 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Activity, ExternalLink } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 import manish from "../assets/manish.png";
 
-
+const STATS = [
+  { val: 20,  suffix: "+", label: "Projects built" },
+  { val: 240, suffix: "+", label: "DSA problems solved" },
+  { val: 10,  suffix: "+", label: "Certifications" },
+  { val: 1,   suffix: "",  label: "Active internship" },
+];
 
 export default function About() {
-  return (
-    <SectionWrapper id="about" className="py-28">
-      <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle pre="Who am I?" main="About" accent="Me" />
-        <SectionSubtitle>Passionate developer, curious by nature, builder at heart</SectionSubtitle>
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
-        <div className="grid md:grid-cols-5 gap-12 items-center">
-          {/* IMAGE */}
+  return (
+    <SectionWrapper id="about" className="py-24">
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionTitle index="01" label="Who am I" main="About" accent="me" />
+        <SectionSubtitle>A quick read before you check the receipts below.</SectionSubtitle>
+
+        <div className="grid md:grid-cols-5 gap-12 items-start">
+          {/* PHOTO */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="md:col-span-2 flex justify-center"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-2"
           >
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 rounded-3xl blur-2xl" />
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-cyan-900/40 to-indigo-900/40 flex items-center justify-center">
-              <img src={manish} className="w-full h-full object-cover" alt="Manish" />
+              <div className="absolute -inset-3 bg-gradient-to-br from-[#34d399]/10 to-[#60a5fa]/10 rounded-3xl blur-2xl" />
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/10">
+                <img src={manish} alt="Manish Dange" className="w-full h-full object-cover" />
               </div>
-              {/* FLOATING CARDS */}
-              <motion.div
-                animate={{ y: [-4, 4, -4] }}
-                transition={{ repeat: Infinity, duration: 3 }}
-                className="absolute -bottom-4 -right-4 bg-[#0d1117] border border-cyan-500/20 px-3 py-2 rounded-xl text-xs font-semibold text-cyan-400 shadow-xl"
-              >
-                🚀 Open to Work
-              </motion.div>
-              <motion.div
-                animate={{ y: [4, -4, 4] }}
-                transition={{ repeat: Infinity, duration: 3.5 }}
-                className="absolute -top-4 -left-4 bg-[#0d1117] border border-indigo-500/20 px-3 py-2 rounded-xl text-xs font-semibold text-indigo-400 shadow-xl"
-              >
-                🎓 SVVV Indore
-              </motion.div>
+            </div>
+            <div className="mt-4 space-y-2">
+              {[
+                { icon: <MapPin size={13} />, text: "Indore, Madhya Pradesh, India" },
+                { icon: <Mail size={13} />,   text: "dangemanish35@gmail.com" },
+                { icon: <Phone size={13} />,  text: "+91 78038 61195" },
+              ].map((c, i) => (
+                <div key={i} className="flex items-center gap-2.5 text-[#7c8aa0] text-xs">
+                  <span className="text-[#34d399]">{c.icon}</span>{c.text}
+                </div>
+              ))}
             </div>
           </motion.div>
 
           {/* TEXT */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="md:col-span-3"
           >
-            <p className="text-gray-300 mb-4 leading-8 text-base">
-              I'm a <span className="text-cyan-400 font-semibold">Computer Science undergraduate</span> at SVVV Indore,
-              specializing in Information and Cyber Security. I love building products that merge technology with creativity.
+            <p className="text-gray-200 mb-4 leading-8 text-[15px]">
+              I'm a <span className="text-[#34d399] font-medium">Computer Science undergraduate</span> at
+              Shri Vaishnav Vidyapeeth Vishwavidyalaya (SVVV), Indore, specializing in Information &amp;
+              Cyber Security — currently in my 3rd year.
             </p>
-            <p className="text-gray-500 mb-8 leading-7 text-sm">
-              From sentiment analysis tools to anomaly detection systems to full-stack web applications —
-              I enjoy solving real-world problems with clean, efficient code. Currently deepening my expertise in
-              AI/ML integration and advanced backend architecture with Django & REST APIs.
+            <p className="text-[#7c8aa0] mb-6 leading-7 text-sm">
+              Day to day, I build full-stack products with React on the front end and Django REST
+              Framework on the back — job portals, student note-sharing platforms, and CRM tools that
+              are actually in use, not just tutorial clones. The cyber security specialization shapes how
+              I build: auth flows, input validation, and API security aren't an afterthought for me.
+              Outside of shipping, I spend time on LeetCode and HackerRank sharpening data structures
+              and algorithms.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
-              {[
-                { icon: <MapPin size={15} />, label: "Location", value: "Indore, MP, India" },
-                { icon: <Mail size={15} />, label: "Email", value: "dangemanish35@gmail.com", small: true },
-                { icon: <Activity size={15} />, label: "Status", value: "Available 🟢" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                  <span className="text-cyan-400 mt-0.5 shrink-0">{item.icon}</span>
-                  <div>
-                    <p className="text-[10px] text-gray-600 uppercase tracking-wider mb-0.5">{item.label}</p>
-                    <p className={`text-gray-300 font-medium ${item.small ? "text-[11px]" : "text-xs"}`}>{item.value}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" ref={ref}>
+              {STATS.map((s, i) => (
+                <div key={i} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] text-center">
+                  <div className="text-xl font-bold text-white font-mono-label">
+                    {inView ? <CountUp end={s.val} duration={1.6} suffix={s.suffix} /> : `0${s.suffix}`}
                   </div>
+                  <div className="text-[10px] text-[#7c8aa0] mt-1 leading-tight">{s.label}</div>
                 </div>
               ))}
             </div>
-
-            
           </motion.div>
         </div>
       </div>

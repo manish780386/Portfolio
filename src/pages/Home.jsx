@@ -1,11 +1,10 @@
 import React from "react";
-import ParticleField from "../components/ParticleField";
+import StarField from "../components/StarField.jsx";
 import Hero from "../sections/Hero";
-import Stats from "../sections/Stats";
+import SystemMetrics from "../sections/SystemMetrics.jsx";
 import About from "../sections/About";
-import GithubStats from "../sections/GithubStats";
-import LeetCodeStats from "../sections/LeetCodeStats";
 import Experience from "../sections/Experience";
+import CodingProfiles from "../sections/CodingProfiles";
 import Certifications from "../sections/Certifications";
 import Projects from "../sections/Projects";
 import Skills from "../sections/Skills";
@@ -15,13 +14,12 @@ import Footer from "../components/Footer";
 export default function Home() {
   return (
     <>
-      <ParticleField />
+      <StarField />
       <Hero />
-      <Stats />
+      <SystemMetrics />
       <About />
-      <GithubStats />
-      <LeetCodeStats />
       <Experience />
+      <CodingProfiles />
       <Certifications />
       <Projects />
       <Skills />

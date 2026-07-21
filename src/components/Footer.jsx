@@ -1,61 +1,44 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Codepen, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Code2, Mail, Heart } from "lucide-react";
 import { Link } from "react-scroll";
 
 const SOCIALS = [
-  { icon: <Github size={18} />, url: "https://github.com/manish780386", label: "GitHub" },
-  { icon: <Linkedin size={18} />, url: "https://www.linkedin.com/in/manish-dange-2a03b6312/", label: "LinkedIn" },
-  { icon: <Codepen size={18} />, url: "https://leetcode.com/u/dangemanish/", label: "LeetCode" },
-  { icon: <Mail size={18} />, url: "mailto:dangemanish35@gmail.com", label: "Email" },
+  { icon: <Github size={16} />,   url: "https://github.com/manish780386",                     label: "GitHub" },
+  { icon: <Linkedin size={16} />, url: "https://www.linkedin.com/in/manish-dange-2a03b6312/", label: "LinkedIn" },
+  { icon: <Code2 size={16} />,    url: "https://leetcode.com/u/dangemanish/",                 label: "LeetCode" },
+  { icon: <Mail size={16} />,     url: "mailto:dangemanish35@gmail.com",                      label: "Email" },
 ];
 
 const QUICK_LINKS = [
   { id: "about", label: "About" },
-  { id: "projects", label: "Projects" },
-  { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
 
 export default function Footer() {
   return (
-    <motion.footer
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="relative z-10 border-t border-white/[0.05] bg-black/30 backdrop-blur-sm"
-    >
-      <div className="max-w-6xl mx-auto px-6 py-14">
+    <footer className="relative z-10 border-t border-white/[0.06] bg-black/20">
+      <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-3 gap-10 mb-10">
-          {/* BRAND */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center">
-                <span className="text-white text-xs font-black">M</span>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-[#34d399]/10 border border-[#34d399]/30 flex items-center justify-center">
+                <span className="text-[#34d399] text-xs font-bold font-mono-label">MD</span>
               </div>
-              <span className="font-black text-lg bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                manish.dev
-              </span>
+              <span className="font-semibold text-white">Manish Dange</span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Full Stack Developer & Cyber Security enthusiast. Building digital products that make a difference.
+            <p className="text-[#7c8aa0] text-sm leading-relaxed">
+              Full Stack Developer specializing in React &amp; Django, studying Cyber Security at SVVV Indore.
             </p>
           </div>
 
-          {/* QUICK LINKS */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-widest">Quick Links</h4>
+            <h4 className="text-white font-semibold text-sm mb-4 font-mono-label uppercase text-xs tracking-widest">Navigate</h4>
             <ul className="space-y-2">
               {QUICK_LINKS.map((l) => (
                 <li key={l.id}>
-                  <Link
-                    to={l.id}
-                    smooth
-                    offset={-70}
-                    duration={600}
-                    className="text-gray-500 hover:text-cyan-400 text-sm cursor-pointer transition"
-                  >
+                  <Link to={l.id} smooth offset={-20} duration={500} className="text-[#7c8aa0] hover:text-[#34d399] text-sm cursor-pointer transition">
                     {l.label}
                   </Link>
                 </li>
@@ -63,20 +46,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* SOCIALS */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-widest">Connect</h4>
+            <h4 className="text-white font-semibold text-sm mb-4 font-mono-label uppercase text-xs tracking-widest">Connect</h4>
             <div className="flex flex-col gap-2">
               {SOCIALS.map((s, i) => (
-                <a
-                  key={i}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 text-sm transition group"
-                >
-                  <span className="group-hover:scale-110 transition-transform">{s.icon}</span>
-                  {s.label}
+                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[#7c8aa0] hover:text-[#34d399] text-sm transition">
+                  {s.icon}{s.label}
                 </a>
               ))}
             </div>
@@ -85,15 +61,13 @@ export default function Footer() {
 
         <div className="h-px bg-white/[0.05] mb-6" />
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-gray-600 text-sm flex items-center gap-1.5">
-            Made with <Heart size={13} className="text-red-500 fill-red-500" /> by{" "}
-            <span className="text-cyan-400 font-semibold">Manish Dange</span>
+          <p className="text-[#4b5768] text-xs flex items-center gap-1.5">
+            Built by <span className="text-[#34d399] font-medium">Manish Dange</span> with
+            <Heart size={11} className="text-[#f2545b] fill-[#f2545b]" /> · React &amp; Tailwind
           </p>
-          <p className="text-gray-700 text-xs">
-            © 2026 · Built with React, Tailwind & Framer Motion
-          </p>
+          <p className="text-[#4b5768] text-xs">© 2026 · All rights reserved</p>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }

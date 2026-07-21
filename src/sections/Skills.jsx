@@ -1,211 +1,73 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
+import React from "react";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
 
-/* ══════════════════════════════════════════════
-   TECH ICON SVGS — real logos inline
-══════════════════════════════════════════════ */
-const ICONS = {
-  React:          <svg viewBox="0 0 24 24" fill="#61DAFB"><circle cx="12" cy="12" r="2.05"/><path fill="none" stroke="#61DAFB" strokeWidth="1" d="M12 6.5c3.5 0 6.8.7 9.1 1.9 2.7 1.4 4.2 3.4 4.2 5.6s-1.5 4.2-4.2 5.6C18.8 20.8 15.5 21.5 12 21.5s-6.8-.7-9.1-1.9C.2 18.2-1.3 16.2-1.3 14s1.5-4.2 4.2-5.6C5.2 7.2 8.5 6.5 12 6.5z"/><path fill="none" stroke="#61DAFB" strokeWidth="1" d="M8.6 9.3c1.75-3 3.8-5.4 5.7-6.9C16.6.5 18.7-.1 20.6.9s2.8 3.2 2.5 6.1c-.3 2.7-1.5 5.8-3.3 8.7-1.75 3-3.8 5.4-5.7 6.9-2.3 1.9-4.4 2.5-6.3 1.5s-2.8-3.2-2.5-6.1c.3-2.7 1.5-5.8 3.3-8.7z"/><path fill="none" stroke="#61DAFB" strokeWidth="1" d="M8.6 14.7c-1.75-3-2.9-6.1-3.2-8.8-.3-2.9.5-5.1 2.4-6.1s4 .4 6.3 2.3c1.9 1.5 3.9 3.9 5.65 6.9 1.75 3 2.9 6.1 3.2 8.8.3 2.9-.5 5.1-2.4 6.1s-4-.4-6.3-2.3c-1.9-1.5-3.9-3.9-5.65-6.9z"/></svg>,
-
-  "Next.js":      <svg viewBox="0 0 24 24" fill="white"><path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 0 1-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 0 1-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 0 0 4.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.499-.054z"/></svg>,
-
-  TypeScript:     <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#3178C6"/><path fill="white" d="M13.5 15.5v1.8c.3.15.66.27 1.08.35.42.08.87.12 1.35.12.46 0 .9-.05 1.31-.14.41-.09.77-.24 1.07-.45.3-.21.54-.48.71-.81.17-.33.26-.73.26-1.2 0-.35-.05-.66-.14-.92a2.07 2.07 0 0 0-.42-.7c-.18-.2-.4-.38-.66-.53-.26-.15-.55-.3-.88-.43-.24-.1-.45-.2-.63-.29a2.8 2.8 0 0 1-.45-.28.97.97 0 0 1-.27-.31.74.74 0 0 1-.09-.37c0-.13.03-.24.08-.34a.74.74 0 0 1 .22-.25c.1-.07.21-.12.35-.15.14-.03.29-.05.46-.05.12 0 .25.01.38.03.13.02.26.05.38.1.13.04.25.1.36.17.11.07.21.15.3.25V12.4a4.2 4.2 0 0 0-.95-.27 6.26 6.26 0 0 0-1.18-.1c-.45 0-.87.05-1.27.15-.4.1-.75.25-1.04.46-.3.2-.53.46-.7.78-.17.32-.25.69-.25 1.12 0 .55.15 1.02.44 1.4.3.38.74.7 1.33.95.26.1.5.2.7.3.21.1.38.2.53.31.14.11.25.23.33.36.08.13.11.28.11.45a.8.8 0 0 1-.3.65c-.2.16-.5.24-.9.24-.56 0-1.07-.13-1.55-.4zM9.5 11.2H12v-1.7H5v1.7h2.5V19H9.5v-7.8z"/></svg>,
-
-  JavaScript:     <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#F7DF1E"/><path d="M6 17.7c.4.6 1.1 1.1 2.2 1.1 1.2 0 2-.6 2-1.5 0-.9-.5-1.4-1.7-1.9l-.6-.2c-1.7-.7-2.8-1.6-2.8-3.5 0-1.8 1.3-3.1 3.4-3.1 1.5 0 2.6.5 3.3 1.8l-1.8 1.2c-.4-.7-.8-1-1.5-1s-1.2.5-1.2 1.1c0 .8.5 1.1 1.6 1.6l.6.2c2 .9 3.1 1.7 3.1 3.6 0 2.1-1.6 3.3-3.8 3.3-2.1 0-3.5-1-4.2-2.4L6 17.7zm8.3.3c.5.8 1 1.4 2.1 1.4 1.1 0 1.7-.5 1.7-2.4v-7.9H20v8c0 3.1-1.8 4.5-4.4 4.5-2.4 0-3.8-1.3-4.5-2.8l2.2-1.3z"/></svg>,
-
-  Python:         <svg viewBox="0 0 24 24"><path fill="#3776AB" d="M11.97 2c-1.2.01-2.34.1-3.35.28C6.27 2.66 6 3.64 6 4.95v1.8h6.19v.6H4.19c-1.28 0-2.4.77-2.75 2.24-.41 1.68-.43 2.73 0 4.49.32 1.31 1.08 2.24 2.36 2.24H5.2v-2.15c0-1.45 1.26-2.73 2.76-2.73h6.17c1.23 0 2.2-1.01 2.2-2.24V4.95c0-1.2-.98-2.09-2.2-2.28-.77-.11-1.97-.17-2.16-.17zm-3.33 1.4c.45 0 .82.37.82.83s-.37.82-.82.82-.82-.36-.82-.82c0-.46.37-.83.82-.83z"/><path fill="#FFD43B" d="M17.61 7.35v2.09c0 1.51-1.28 2.77-2.76 2.77H8.67c-1.21 0-2.2 1.04-2.2 2.24v4.2c0 1.19 1.04 1.89 2.2 2.23 1.39.41 2.73.48 4.4 0 1.1-.31 2.2-1 2.2-2.23V17h-6.2v-.6h8.87c1.28 0 1.76-.89 2.2-2.24.46-1.39.44-2.73 0-4.49-.31-1.28-1.07-2.24-2.35-2.24h-.18v-.08zm-3.3 9.46c.45 0 .82.37.82.83s-.37.82-.82.82-.82-.37-.82-.82c0-.46.37-.83.82-.83z"/></svg>,
-
-  Django:         <svg viewBox="0 0 24 24" fill="#092E20"><rect width="24" height="24" rx="2" fill="#092E20"/><path fill="#44B78B" d="M11.5 3h2.1v10.6c-1.1.2-1.9.3-2.8.3-2.6 0-4-1.2-4-3.4 0-2.1 1.5-3.5 3.8-3.5.4 0 .6 0 .9.1V3zm0 6.1c-.2-.1-.4-.1-.7-.1-1.1 0-1.8.7-1.8 1.8 0 1.1.6 1.7 1.7 1.7.3 0 .5 0 .8-.1V9.1zm3.5 8.6c0 2.4-1.8 3.5-4.4 3.5-1.4 0-2.7-.3-3.6-.7l.4-1.7c.8.4 1.9.7 3 .7 1.3 0 2.1-.6 2.1-1.6V17c-.4.2-1 .3-1.7.3-2.2 0-3.8-1.4-3.8-3.6 0-2.3 1.7-3.8 4.1-3.8.9 0 1.8.2 2.6.5l-1 1.5c-.5-.2-.9-.3-1.4-.3-1.1 0-1.9.7-1.9 1.9 0 1.1.7 1.8 1.9 1.8.4 0 .7-.1 1-.2v-1.5H13v.1h2v4.1z"/></svg>,
-
-  "Tailwind CSS": <svg viewBox="0 0 24 24" fill="#06B6D4"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15 2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.3-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-5 5c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.3.74 1.91 1.35C8.39 15.85 9.5 17 12 17c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C10.61 12.15 9.5 11 7 11z"/></svg>,
-
-  PostgreSQL:     <svg viewBox="0 0 24 24"><path fill="#336791" d="M17.13 18.72c.1-.9.07-1.06.7-1l.16.01c.49.02 1.13.05 1.8-.12 1.3-.34 2.08-1.13.63-1.23l-.53-.03c-1.84-.1-2.06-.76-2.06-.76 2.04-.3 3.41-1.04 3.77-4.03.13-1.03.08-1.93-.13-2.57C22.7 6.68 22 5 20.16 4.28c-1-.38-2.14-.5-3.04-.47l-.96.08C15.15 3.63 14.06 4 13.2 4.67c-1.5 1.14-1.6 2.8-1.58 4.3.03 2.36.56 4.84 2.22 5.44.45.16 1.16.25 1.58-.28.1.4.19.8.24 1.16.13.87.03 1.43-.52 1.84-.79.58-2.04.44-2.77.14-.65-.27-1.02-.73-1.3-1.29l-.59.45c.37.85.96 1.54 1.82 1.94 1.57.72 3.7.47 4.83-.65zm.94-6.46c-.68.47-1.63.5-2.53.36-.55-.1-.97-.27-1.24-.56-.43-.46-.47-1.23-.42-1.98.09-1.48.62-2.77 1.47-3.34.65-.44 1.62-.47 2.4-.3.66.14 1.16.45 1.44.88.48.75.44 1.96.17 2.97-.17.64-.45 1.6-1.29 1.97zm-7.74 5.2c-.27.18-.57.29-.88.32-.5.05-1.01-.15-1.4-.5-.57-.52-.77-1.36-.8-2.16-.07-1.65.4-3.43 1.29-4.3.54-.53 1.3-.82 2.07-.82.3 0 .6.04.9.13.69.2 1.13.66 1.32 1.31.06.18.08.36.08.54v.2c-.37-.28-.84-.43-1.34-.43-1.2 0-2.16.97-2.16 2.16 0 .42.12.8.33 1.13-.13.78-.23 1.58-.23 2.1 0 .11 0 .21.01.31l-.19.01z"/><path fill="#336791" d="M11.9 3.3C8.94 3.3 6.5 5 5.3 7.5c-.7 1.4-1.1 3-1.1 4.7 0 5.6 3.4 8.5 7.7 8.5 1 0 1.9-.2 2.8-.5-1.2-.5-2-1.5-2.4-2.7-.1-.3-.1-.5-.1-.8 0-.5.1-1 .2-1.6-1.4-.8-2.3-2.8-2.4-5-.1-1.6.1-3.5 1.3-4.8.6-.7 1.4-1.2 2.3-1.4l-1.7-1.6z"/></svg>,
-
-  MySQL:          <svg viewBox="0 0 24 24"><path fill="#4479A1" d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.14-.04-.067-.126-.1-.18-.153zM5.77 18.695h-.927a50.854 50.854 0 0 0-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 0 0-.195 4.41H0c.055-1.966.192-3.81.41-5.53h1.15l1.335 4.064h.008l1.347-4.064h1.095c.242 2.015.384 3.86.428 5.53zm4.017-4.08a6.678 6.678 0 0 0-.192-.529c-.07-.148-.14-.29-.214-.428-.086-.147-.174-.29-.258-.428-.086-.148-.165-.29-.245-.42-.086-.154-.165-.3-.24-.447h-.008a13.37 13.37 0 0 1-.274-.515l-.007.009c.055 2.264.07 3.854.054 4.44H7.42c.028-1.5.114-3.073.254-4.736h.95l.947 1.842c.07.14.142.285.214.428.08.154.154.3.225.44.094.176.18.35.26.52.086.166.165.33.247.5h.007a44.49 44.49 0 0 0-.228-3.73h.843c-.013 1.49-.06 2.98-.148 4.478h-.827l-.942-1.845zm9.426 4.08h-2.678v-5.53h.935v4.823h1.743v.707zm2.63 0h-.92v-5.53h.92v5.53z"/></svg>,
-
-  Firebase:       <svg viewBox="0 0 24 24"><path fill="#FFCA28" d="M5.34 15.9L8.85 2.17a.5.5 0 0 1 .92-.1l2.1 4.1 1.08-2.06a.5.5 0 0 1 .9 0L18.66 15.9l-6.66 3.72L5.34 15.9z"/><path fill="#FFA000" d="M5.34 15.9l3.5-3.5L12 15.9l-6.66 3.72z"/><path fill="#F57F17" d="M12 10.46l2.57-4.9 4.09 10.34L12 10.46z"/></svg>,
-
-  "Git / GitHub": <svg viewBox="0 0 24 24" fill="#F05032"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>,
-
-  Docker:         <svg viewBox="0 0 24 24" fill="#2496ED"><path d="M13.98 11.08h2.12v-1.9h-2.12v1.9zm-2.95 0h2.12v-1.9h-2.12v1.9zm-2.95 0h2.12v-1.9H8.08v1.9zm-2.95 0h2.12v-1.9H5.13v1.9zm5.9-2.95h2.12V6.23h-2.12v1.9zm-2.95 0h2.12V6.23H8.08v1.9zm-2.95 0h2.12V6.23H5.13v1.9zm8.85 2.95h2.12v-1.9h-2.12v1.9zM23.49 11.43a3.03 3.03 0 0 0-1.97-1.25 3.8 3.8 0 0 0-.08-.83A4.33 4.33 0 0 0 17 5.7a4.24 4.24 0 0 0-3.26 1.52 2.12 2.12 0 0 0-1.3-.44h-.1v1.9h.1c.35 0 .63.28.63.63v1.9h-1.9v-1.9c0-.35.28-.63.63-.63h.1V6.78h-.1a4 4 0 0 0-2.08.59A4.48 4.48 0 0 0 6.49 5.7a4.33 4.33 0 0 0-4.45 4.22c0 .14.01.27.02.4A2.76 2.76 0 0 0 0 12.7c0 1.03.57 1.93 1.42 2.4.6.32 5.6.43 7.75.43h.1c2.56 0 8.1-.1 8.88-.43a2.76 2.76 0 0 0 1.65-1.8c.48-.28.87-.7 1.1-1.2a2.76 2.76 0 0 0 2.59-1.67z"/></svg>,
-
-  Linux:          <svg viewBox="0 0 24 24" fill="#FCC624"><path d="M12 0a12 12 0 1 0 0 24A12 12 0 0 0 12 0zm0 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-.5 3c-.28 0-.5.22-.5.5v1c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1zm-3 3c-.28 0-.5.22-.5.5v1c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1zm6 0c-.28 0-.5.22-.5.5v1c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1zm-3 3c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5h-1zm-4 2c-.28 0-.5.22-.5.5v1c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1zm8 0c-.28 0-.5.22-.5.5v1c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1zm-8 3c-.28 0-.5.22-.5.5v1c0 .28.22.5.5.5h7c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5H8z"/></svg>,
-
-  "Node.js":      <svg viewBox="0 0 24 24" fill="#339933"><path d="M11.998.016a1.006 1.006 0 0 0-.496.132L2.058 5.488c-.31.178-.5.51-.5.868v10.288c0 .358.19.69.5.868l9.444 5.34a.997.997 0 0 0 .996 0l9.444-5.34c.31-.178.5-.51.5-.868V6.356c0-.358-.19-.69-.5-.868L12.494.148a1.006 1.006 0 0 0-.496-.132zM12 1.56l8.62 4.87v9.74L12 21.04l-8.62-4.87V6.43L12 1.56zm-.05 3.58a5.75 5.75 0 0 0-5.75 5.75 5.75 5.75 0 0 0 5.75 5.75 5.75 5.75 0 0 0 5.75-5.75 5.75 5.75 0 0 0-5.75-5.75zm0 1.5a4.25 4.25 0 0 1 4.25 4.25 4.25 4.25 0 0 1-4.25 4.25 4.25 4.25 0 0 1-4.25-4.25A4.25 4.25 0 0 1 11.95 6.64z"/></svg>,
-
-  "REST API":     <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF6B35"/><text x="4" y="16" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold">API</text></svg>,
-
-  "AI / ML":      <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#7C3AED"/><path fill="white" d="M12 4a1 1 0 0 1 1 1v1.07A7 7 0 0 1 19 13h1a1 1 0 0 1 0 2h-1a7 7 0 0 1-6 6.93V23a1 1 0 0 1-2 0v-1.07A7 7 0 0 1 5 15H4a1 1 0 0 1 0-2h1a7 7 0 0 1 6-6.93V5a1 1 0 0 1 1-1zm0 4a5 5 0 1 0 0 10A5 5 0 0 0 12 8zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>,
-
-  Postman:        <svg viewBox="0 0 24 24" fill="#FF6C37"><path d="M13.527.099C6.955-.744.942 3.9.099 10.473c-.843 6.572 3.8 12.584 10.373 13.428 6.573.843 12.587-3.801 13.428-10.374C24.744 6.955 20.101.943 13.527.099zm2.471 7.485a.855.855 0 0 0-.593.25l-4.453 4.453-.307-.307-.643-.643 4.453-4.453a.855.855 0 0 0-1.208-1.208l-4.453 4.452-.619-.619a.397.397 0 0 0-.492-.046.388.388 0 0 0-.14.492l2.366 5.337a.392.392 0 0 0 .647.116l5.338-5.338a.853.853 0 0 0-.897-1.285z"/></svg>,
-
-  "Cyber Security": <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#EF4444"/><path fill="white" d="M12 2L4 5v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5l-8-3zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 8c2.67 0 5.33 1.33 5.33 2v1H6.67v-1C6.67 15.33 9.33 14 12 14z"/></svg>,
-
-  "Three.js":     <svg viewBox="0 0 24 24" fill="white"><path d="M.38 0h23.24L12 23.99.38 0zm10.14 5.49H6.9L17.1 21.85l-4.18-7.24-2.4 3.88-2.35-4.07 3.84-6.18-1.49-2.75z"/></svg>,
-
-  "Framer Motion":<svg viewBox="0 0 24 24" fill="#BB4AE8"><path d="M4 0h16v8h-8zm0 8h8l8 8H4zm0 8h8v8z"/></svg>,
-
-  "React Native": <svg viewBox="0 0 24 24" fill="#61DAFB"><circle cx="12" cy="12" r="2.05"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" strokeWidth="1"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(120 12 12)"/></svg>,
-};
-
-/* ── CATEGORIES ── */
 const CATEGORIES = [
   {
-    title: "Frontend",
-    color: "from-cyan-500 to-blue-500",
-    glow: "#06b6d4",
-    skills: ["React","Next.js","TypeScript","JavaScript","Tailwind CSS","Framer Motion","HTML & CSS","React Native"],
-    levels: [90,65,78,88,92,80,95,72],
+    title: "Frontend", color: "#34d399",
+    skills: [["React", 90], ["JavaScript", 88], ["Tailwind CSS", 92], ["TypeScript", 70], ["React Native", 60]],
   },
   {
-    title: "Backend",
-    color: "from-green-500 to-teal-500",
-    glow: "#22c55e",
-    skills: ["Django","Python","REST API","Node.js"],
-    levels: [82,85,88,55],
+    title: "Backend", color: "#60a5fa",
+    skills: [["Django / DRF", 85], ["Python", 85], ["REST APIs", 88], ["Node.js", 50]],
   },
   {
-    title: "Database",
-    color: "from-purple-500 to-pink-500",
-    glow: "#a855f7",
-    skills: ["PostgreSQL","MySQL","Firebase","Git / GitHub"],
-    levels: [80,78,70,88],
+    title: "Database", color: "#a78bfa",
+    skills: [["MySQL", 80], ["PostgreSQL", 75], ["Firebase", 68]],
   },
   {
-    title: "DevOps & Tools",
-    color: "from-orange-500 to-red-500",
-    glow: "#f97316",
-    skills: ["Docker","Linux","Postman","Three.js"],
-    levels: [55,72,85,60],
-  },
-  {
-    title: "Learning / Growing",
-    color: "from-yellow-500 to-orange-400",
-    glow: "#eab308",
-    skills: ["AI / ML","Cyber Security","Framer Motion","REST API"],
-    levels: [45,70,80,88],
+    title: "Security & Tools", color: "#f5b942",
+    skills: [["Network Security", 65], ["OWASP Top 10", 60], ["Git / GitHub", 88], ["Docker", 55], ["Linux", 70]],
   },
 ];
 
-/* ── ICON PILL ── */
-function IconPill({ name, level, i }) {
+function Bar({ name, pct, color, i }) {
   const { ref, inView } = useInView({ triggerOnce: true });
-  const icon = ICONS[name] || ICONS["REST API"];
-
   return (
-    <motion.div ref={ref}
-      initial={{ opacity: 0, scale: 0.85, y: 10 }}
-      animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-      transition={{ delay: i * 0.06, duration: 0.4 }}
-      whileHover={{ scale: 1.08, y: -3 }}
-      className="group relative flex flex-col items-center gap-2 p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.14] cursor-default transition-all"
-    >
-      {/* ICON */}
-      <div className="w-9 h-9 shrink-0">{icon}</div>
-
-      {/* NAME */}
-      <span className="text-[11px] text-gray-400 font-medium text-center leading-tight group-hover:text-white transition-colors">
-        {name}
-      </span>
-
-      {/* LEVEL BAR */}
-      <div className="w-full h-1 bg-white/[0.06] rounded-full overflow-hidden">
+    <div ref={ref}>
+      <div className="flex justify-between text-xs mb-1.5">
+        <span className="text-[#c7d0dc]">{name}</span>
+        <span className="font-mono-label" style={{ color }}>{pct}%</span>
+      </div>
+      <div className="h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
-          animate={inView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1, delay: i * 0.06 + 0.2, ease: "easeOut" }}
-          className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500"
+          animate={inView ? { width: `${pct}%` } : {}}
+          transition={{ duration: 1, delay: i * 0.07, ease: "easeOut" }}
+          className="h-full rounded-full"
+          style={{ background: color }}
         />
       </div>
-      <span className="text-[9px] text-gray-600">{level}%</span>
-    </motion.div>
+    </div>
   );
 }
 
-/* ── CATEGORY CARD ── */
-function CategoryCard({ cat, i }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: i * 0.1, duration: 0.5 }}
-      className="rounded-2xl bg-white/[0.025] border border-white/[0.07] overflow-hidden"
-    >
-      {/* HEADER */}
-      <button
-        onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between p-5 group"
-      >
-        <div className="flex items-center gap-3">
-          <div className={`px-3 py-1.5 rounded-xl bg-gradient-to-r ${cat.color} text-white text-xs font-bold`}>
-            {cat.title}
-          </div>
-          <span className="text-gray-600 text-xs">{cat.skills.length} skills</span>
-        </div>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}
-          className="text-gray-600 group-hover:text-gray-300 transition">
-          ▼
-        </motion.div>
-      </button>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 px-5 pb-5">
-              {cat.skills.map((s, idx) => (
-                <IconPill key={s} name={s} level={cat.levels[idx]} i={idx} />
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
-/* ══ MAIN ══ */
 export default function Skills() {
   return (
-    <SectionWrapper id="skills" className="py-28">
+    <SectionWrapper id="skills" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle pre="What I Know" main="Technical" accent="Skills" />
-        <SectionSubtitle>Click any category to expand — real icons, real proficiency</SectionSubtitle>
+        <SectionTitle index="05" label="What I know" main="Technical" accent="skills" />
+        <SectionSubtitle>Grouped by where I use them day to day — numbers are self-rated proficiency, not vanity metrics.</SectionSubtitle>
 
-        {/* ALL TECH ICONS ROW — always visible */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 mb-10"
-        >
-          {Object.entries(ICONS).slice(0, 20).map(([name, icon], i) => (
-            <motion.div key={name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.04 }}
-              whileHover={{ scale: 1.2, y: -4 }}
-              className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl bg-white/[0.025] border border-white/[0.06] hover:border-white/[0.14] cursor-default transition-all group"
+        <div className="grid md:grid-cols-2 gap-5">
+          {CATEGORIES.map((cat, ci) => (
+            <motion.div
+              key={cat.title}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: ci * 0.08 }}
+              className="p-6 rounded-xl bg-white/[0.02] border border-white/[0.06]"
             >
-              <div className="w-8 h-8">{icon}</div>
-              <span className="text-[9px] text-gray-600 group-hover:text-gray-300 transition text-center leading-tight">
-                {name.replace(" CSS","").replace(" / GitHub","").replace("React ","RN ")}
-              </span>
+              <div className="flex items-center gap-2 mb-5">
+                <span className="w-2 h-2 rounded-full" style={{ background: cat.color }} />
+                <h3 className="text-sm font-bold text-white">{cat.title}</h3>
+              </div>
+              <div className="space-y-4">
+                {cat.skills.map(([name, pct], i) => (
+                  <Bar key={name} name={name} pct={pct} color={cat.color} i={i} />
+                ))}
+              </div>
             </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CATEGORY CARDS (expandable) */}
-        <div className="space-y-3">
-          {CATEGORIES.map((cat, i) => (
-            <CategoryCard key={cat.title} cat={cat} i={i} />
           ))}
         </div>
       </div>

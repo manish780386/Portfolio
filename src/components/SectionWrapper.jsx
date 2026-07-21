@@ -3,34 +3,35 @@ import { motion } from "framer-motion";
 
 export function SectionWrapper({ id, children, className = "" }) {
   return (
-    <section id={id} className={`relative z-10 ${className}`}>
+    <section id={id} className={`relative z-10 scroll-mt-20 ${className}`}>
       {children}
     </section>
   );
 }
 
-export function SectionTitle({ pre, main, accent }) {
+export function SectionTitle({ index, label, main, accent }) {
   return (
-    <div className="text-center mb-4">
-      {pre && (
+    <div className="mb-4">
+      {label && (
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-cyan-500 text-sm font-semibold tracking-widest uppercase mb-3"
+          viewport={{ once: true }}
+          className="flex items-center gap-2 text-[#34d399] font-mono-label text-xs uppercase mb-3"
         >
-          {pre}
+          {index && <span className="text-[#4b5768]">{index}</span>}
+          {label}
         </motion.p>
       )}
       <motion.h2
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl md:text-5xl font-black tracking-tight"
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-3xl md:text-4xl font-bold tracking-tight text-white"
       >
         {main}{" "}
-        <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-          {accent}
-        </span>
+        {accent && <span className="text-[#7c8aa0] font-normal">{accent}</span>}
       </motion.h2>
     </div>
   );
@@ -41,23 +42,11 @@ export function SectionSubtitle({ children }) {
     <motion.p
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ delay: 0.2 }}
-      className="text-center text-gray-500 text-base max-w-xl mx-auto mb-14"
+      viewport={{ once: true }}
+      transition={{ delay: 0.15 }}
+      className="text-[#7c8aa0] text-sm max-w-xl mb-12 leading-relaxed"
     >
       {children}
     </motion.p>
-  );
-}
-
-export function GlassCard({ children, className = "", hover = true, ...props }) {
-  return (
-    <motion.div
-      whileHover={hover ? { scale: 1.02, y: -4 } : {}}
-      transition={{ duration: 0.2 }}
-      className={`p-6 rounded-2xl bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm ${className}`}
-      {...props}
-    >
-      {children}
-    </motion.div>
   );
 }

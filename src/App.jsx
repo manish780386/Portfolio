@@ -1,42 +1,56 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
-import CustomCursor from "./components/CustomCursor";
 import BackToTop from "./components/BackToTop";
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
 import ResumePage from "./pages/ResumePage";
+import { SidebarProvider, useSidebar } from "./context/SidebarContext";
+
+function Layout() {
+  const { collapsed } = useSidebar();
+
+  return (
+    <div className="bg-[#060a11] text-white overflow-x-hidden font-sans flex min-h-screen">
+      <Sidebar />
+
+      {/*
+        THE FIX: this margin now animates off the exact same `collapsed`
+        boolean the rail's width uses (via SidebarContext), instead of a
+        static Tailwind breakpoint class that never changed. Mobile keeps
+        its fixed top padding since the rail becomes a topbar there.
+      */}
+      <motion.main
+        animate={{ marginLeft: typeof window !== "undefined" && window.innerWidth >= 768 ? (collapsed ? 76 : 232) : 0 }}
+        transition={{ duration: 0.25, ease: "easeInOut" }}
+        className="flex-1 min-w-0 pt-14 md:pt-0"
+      >
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            style: { background: "#0d131d", color: "#e7ecf2", border: "1px solid rgba(52,211,153,0.2)", borderRadius: "10px", fontSize: "14px" },
+            success: { iconTheme: { primary: "#34d399", secondary: "#0d131d" } },
+          }}
+        />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+        </Routes>
+      </motion.main>
+      <BackToTop />
+    </div>
+  );
+}
 
 export default function App() {
   return (
     <Router>
-      <div className="bg-[#04050e] text-white overflow-x-hidden cursor-none font-sans flex min-h-screen">
-        <CustomCursor />
-        <Sidebar />
-        {/* MAIN CONTENT — offset by sidebar */}
-        <main className="flex-1 ml-0 md:ml-[72px] lg:ml-[240px] transition-all duration-300">
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: "#0d1117",
-                color: "#e2e8f0",
-                border: "1px solid rgba(0,255,255,0.15)",
-                borderRadius: "12px",
-                fontSize: "14px",
-              },
-              success: { iconTheme: { primary: "#00bcd4", secondary: "#0d1117" } },
-            }}
-          />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/resume" element={<ResumePage />} />
-          </Routes>
-        </main>
-        <BackToTop />
-      </div>
+      <SidebarProvider>
+        <Layout />
+      </SidebarProvider>
     </Router>
   );
 }
