@@ -14,6 +14,7 @@ import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/Sec
 const CERTS = [
   { title: "Internet of Things (IoT)",             org: "NPTEL",                                  icon: "🌐", color: "from-blue-500 to-indigo-500" },
   { title: "Soft Skills for Professionals",        org: "NPTEL",                                  icon: "🤝", color: "from-teal-500 to-green-500" },
+  { title: "Introduction to Cloud Computing",      org: "NPTEL",                                  icon: "☁️", color: "from-cyan-500 to-blue-500" },
   { title: "Artificial Intelligence",               org: "Physics Wallah",                         icon: "🤖", color: "from-purple-500 to-pink-500" },
   { title: "GIAC Cyber Defense Certified",          org: "SVVV",                                   icon: "🛡️", color: "from-[#34d399] to-teal-500" },
   { title: "Python Programming Training",           org: "Infosys Springboard",                    icon: "🐍", color: "from-yellow-500 to-orange-500" },

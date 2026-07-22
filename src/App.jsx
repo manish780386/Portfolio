@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import StarField from "./components/StarField";
+import CustomCursor from "./components/CustomCursor";
 import Sidebar from "./components/Sidebar";
 import BackToTop from "./components/BackToTop";
 import Home from "./pages/Home";
@@ -21,6 +22,7 @@ function Layout() {
         entirely on navigation since only Home.jsx mounted it before.
       */}
       <StarField />
+      <CustomCursor />
       <Sidebar />
 
       {/*

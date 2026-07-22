@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
-/* ══════════════════════════════════════════════
-   DESIGN TOKENS — "Access Console" system
-   Built for a full-stack dev / cyber security profile.
-   Do not casually change these — every component
-   references this palette + type scale.
-══════════════════════════════════════════════ */
+
 @theme {
   --color-bg: #060a11;
   --color-panel: #0d131d;
@@ -71,6 +66,23 @@ h1, h2, h3, h4 {
 .section-line {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--color-line), transparent);
+}
+
+/* Rocket cursor — only applied when CustomCursor.jsx detects a fine-pointer
+   desktop device and adds this class to <body>. Text inputs keep the normal
+   caret so typing still feels right. */
+.custom-cursor-active {
+  cursor: none;
+}
+.custom-cursor-active a,
+.custom-cursor-active button,
+.custom-cursor-active [data-cursor] {
+  cursor: none;
+}
+.custom-cursor-active input,
+.custom-cursor-active textarea,
+.custom-cursor-active select {
+  cursor: auto;
 }
 
 /* Respect reduced-motion preference across the app */

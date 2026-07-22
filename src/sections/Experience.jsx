@@ -9,7 +9,7 @@ const EXPERIENCE = [
   {
     title: "Full Stack Developer Intern",
     org: "The Prime Step",
-    time: "Nov 2023 – Present",
+    time: "Nov 2023 – 2025",
     location: "IT / Computers – Software",
     desc: "Designing, developing and maintaining educational software applications, working across the stack with Python, JavaScript and React.",
     points: [
@@ -17,14 +17,26 @@ const EXPERIENCE = [
       "Improved platform performance and usability through continuous optimization and feedback integration",
       "Delivered work reliably in a fast-paced environment while meeting project deadlines",
     ],
-    tags: ["React", "Django", "Python", "REST API"],
+    tags: ["HTML", "CSS", "JavaScript","Tailwind CSS", "React", "Python", "Django","SQL","DRF", "REST API"],
   },
 ];
 
 const PROJECTS_LOG = [
-  { name: "Chatbot-Based Museum Ticketing System", time: "Jan 2026 – Present", desc: "AI/NLP ticketing assistant with payment integration, mentored by Prof. Vishwas Dixit — team of 4." },
-  { name: "JobSt@ck — Full Stack Job Portal", time: "Dec 2025 – Feb 2026", desc: "React + Django REST job portal with JWT auth, resume upload and admin job posting." },
-  { name: "SVVV Notes Portal", time: "May 2025 – Oct 2026", desc: "Notes & PYQ platform for students with subject-wise filtering and an admin content panel." },
+  {
+    name: "DoctorGuide — AI Powered Wellness Platform",
+    time: "Jul 2024 – Aug 2025",
+    desc: "AI-powered healthcare platform leveraging Google Gemini AI for intelligent symptom analysis, specialist recommendation, doctor booking, and real-time appointment scheduling with a modern responsive interface."
+  },
+  {
+    name: "Spotify Clone — React Music Streaming App",
+    time: "Jan 2024 – Feb 2025",
+    desc: "Modern music streaming application inspired by Spotify with playlist management, audio playback controls, progress tracking, responsive UI, and reusable React components."
+  },
+  {
+    name: "Virtual-Assistance — AI Voice Assistant",
+    time: "Nov 2023 – Dec 2024",
+    desc: "Voice-controlled web assistant built with React and Web Speech API, enabling hands-free browsing, website navigation, media playback, and intelligent voice command execution."
+  },
 ];
 
 function TimelineCard({ item, i, accent }) {
