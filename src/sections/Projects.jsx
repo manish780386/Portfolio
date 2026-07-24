@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ExternalLink, Github, Star, X, Globe, Code2,
-  Package, BadgeCheck, Zap, Download
+  ExternalLink, Github, Star, Code2,
+  Package, BadgeCheck, Zap, Download, Globe
 } from "lucide-react";
 import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
 
@@ -17,13 +17,13 @@ const PUBLISHED = [
     desc: "Instantly turn any JSON into an interactive tree, mind-map graph, diff view, API client, and format converter — all without leaving your editor.",
     icon: "🌳",
     stats: [
-      { label: "Installs", val: "100+",   icon: <Download size={13} /> },
+      { label: "Installs", val: "100+",  icon: <Download size={13} /> },
       { label: "Version",  val: "1.0.0", icon: <Zap size={13} /> },
       { label: "Rating",   val: "5.0 ★", icon: <Star size={13} /> },
     ],
     tags: ["TypeScript", "VS Code", "JSON", "API Client", "Visualization"],
     features: ["Interactive Tree", "Graph View", "JSON Diff", "JSONPath Query", "API Client", "Format Converter"],
-    liveUrl: "https://marketplace.visualstudio.com/items?itemName=mdange.json-tree-visualizer",
+    liveUrl:   "https://marketplace.visualstudio.com/items?itemName=mdange.json-tree-visualizer",
     githubUrl: "https://github.com/manish780386/json-tree-visualizer",
     color: "from-emerald-400 to-cyan-500", glow: "rgba(6,182,212,0.3)",
   },
@@ -34,13 +34,13 @@ const PUBLISHED = [
     desc: "Highlights arithmetic, comparison, logical, assignment, and bitwise operators with distinct colors across 15+ languages. Toggle on/off from the status bar.",
     icon: "🎨",
     stats: [
-      { label: "Installs", val: "13+",    icon: <Download size={13} /> },
+      { label: "Installs", val: "13+",   icon: <Download size={13} /> },
       { label: "Version",  val: "1.0.3", icon: <Zap size={13} /> },
       { label: "Rating",   val: "4.0 ★", icon: <Star size={13} /> },
     ],
     tags: ["TypeScript", "VS Code", "Syntax Highlighting", "15+ Languages"],
     features: ["Arithmetic Ops", "Comparison Ops", "Logical Ops", "15+ Languages", "Custom Colors", "Stats Counter"],
-    liveUrl: "https://marketplace.visualstudio.com/items?itemName=mdange.operator-colorizer",
+    liveUrl:   "https://marketplace.visualstudio.com/items?itemName=mdange.operator-colorizer",
     githubUrl: "https://github.com/manish780386",
     color: "from-orange-400 to-pink-500", glow: "rgba(249,115,22,0.3)",
   },
@@ -51,53 +51,86 @@ const PUBLISHED = [
     desc: "Sets up a complete Django project in seconds — virtual environment, DRF, CORS, dotenv, .gitignore, requirements.txt, and a branded welcome page. Just one command.",
     icon: "⚡",
     stats: [
-      { label: "Install",  val: "pip",         icon: <Package size={13} /> },
-      { label: "Package",  val: "forgekit",    icon: <Zap size={13} /> },
-      { label: "Type",     val: "Open Source", icon: <BadgeCheck size={13} /> },
+      { label: "Install", val: "pip",         icon: <Package size={13} /> },
+      { label: "Package", val: "forgekit",    icon: <Zap size={13} /> },
+      { label: "Type",    val: "Open Source", icon: <BadgeCheck size={13} /> },
     ],
     tags: ["Python", "Django", "CLI Tool", "DRF", "CORS", "dotenv"],
     features: ["Auto venv", "DRF configured", "CORS ready", "dotenv", ".gitignore", "Welcome page"],
-    liveUrl: "https://pypi.org/project/django-forgekit/",
+    liveUrl:   "https://pypi.org/project/django-forgekit/",
     githubUrl: "https://github.com/manish780386",
     color: "from-blue-400 to-indigo-500", glow: "rgba(99,102,241,0.3)",
   },
 ];
 
-
+/* ══════════════════════════════════════════════════
+   WEB PROJECTS — 4 new ones with GitHub only
+   emoji backgrounds act as visual when no screenshot
+══════════════════════════════════════════════════ */
 const PROJECTS = [
   {
-    id: 1, name: "SVVV Notes Website", emoji: "📚",
-    desc: "Student platform for quality notes access with auth, file management, and admin controls. Used by 100+ students.",
-    tech: ["React", "Django", "SQL", "Python"],
-    liveUrl: "https://svvv-notes-website-poij.vercel.app/",
-    githubUrl: "https://github.com/manish780386",
-    category: "React", featured: true,
-    color: "from-indigo-500 to-purple-500", accentColor: "#6366f1",
-    screenshot: "/screenshots/svvv.png", // "/screenshots/svvv-notes.png"
+    id: 1,
+    name: "TripKar",
+    subtitle: "AI-Powered Travel Planner",
+    emoji: "✈️",
+    desc: "Plan your perfect Indian trip with AI. Just say 'Delhi to Goa, 4 days, ₹15k' and TripKar builds your complete itinerary — budget, hotels, routes, weather — all in one place.",
+    tech: ["React", "Django", "Claude AI", "PostgreSQL", "Redis", "Razorpay", "Celery"],
+    highlights: ["AI Itinerary Generator", "Smart Budget Calculator", "5 Free Trips + Paywall", "English + Hindi (i18next)", "WhatsApp Share"],
+    githubUrl: "https://github.com/manish780386/AIPE-AI-Powered-Everthing",
+    category: "Full Stack", featured: true,
+    gradient: "from-sky-500 via-cyan-500 to-teal-500",
+    accentColor: "#06b6d4",
+    bgEmoji: "✈️🗺️🌏",
+    screenshot: null,
   },
   {
-    id: 2, name: "KisanMitra", emoji: "🌾",
-    desc: "Smart farmer assistant — market prices, produce selling, buyer-farmer connections, and crop advisory.",
-    tech: ["React", "TypeScript", "Tailwind"],
-    liveUrl: "https://kisanmitra-six.vercel.app/",
-    githubUrl: "https://github.com/manish780386/-KisanMitra",
-    githubOnly: true, category: "TypeScript", featured: true,
-    color: "from-lime-500 to-green-500", accentColor: "#84cc16",
-    screenshot: "/screenshots/kisan.png", // "/screenshots/kisanmitra.png"
+    id: 2,
+    name: "NeighborHub",
+    subtitle: "Hyperlocal Community Platform",
+    emoji: "🏘️",
+    desc: "Apni colony, apna network — connects people within 2km radius. Real-time WebSocket chat, interactive Leaflet.js map, community groups, marketplace, and live notifications.",
+    tech: ["React", "Django", "WebSocket", "PostgreSQL", "Redis", "Leaflet.js", "Celery"],
+    highlights: ["2km Radius Feed", "Real-time WebSocket Chat", "Interactive Map", "Marketplace", "Community Groups"],
+    githubUrl: "https://github.com/manish780386",
+    category: "Full Stack", featured: true,
+    gradient: "from-green-500 via-emerald-500 to-teal-500",
+    accentColor: "#22c55e",
+    bgEmoji: "🏘️🗺️💬",
+    screenshot: null,
   },
   {
-    id: 3, name: "LIC Agent Website", emoji: "🏢",
-    desc: "Enterprise CRM for LIC agents — client management, policy tracking, and sales analytics. 6+ months in production.",
-    tech: ["React", "Django", "Tailwind", "SQL"],
-    liveUrl: "https://santosh-gayakwad-lic.vercel.app/",
+    id: 3,
+    name: "Mitti Ka Swad",
+    subtitle: "Heritage Indian Food Platform",
+    emoji: "🍛",
+    desc: "Cultural preservation food ordering platform connecting customers to authentic traditional Indian dishes from 28 states. Every dish carries its cultural story, grandma's tip, and festival association.",
+    tech: ["React", "Django", "PostgreSQL", "Razorpay", "Tailwind", "Framer Motion"],
+    highlights: ["500+ Heritage Dishes", "28 Indian States", "Voice Search (Hindi/English)", "Cultural Storytelling", "Vendor Dashboard"],
     githubUrl: "https://github.com/manish780386",
-    category: "React", featured: false,
-    color: "from-blue-500 to-cyan-500", accentColor: "#3b82f6",
-    screenshot: "/screenshots/lic.png", // "/screenshots/lic-agent.png"
+    category: "Full Stack", featured: true,
+    gradient: "from-orange-500 via-amber-500 to-yellow-500",
+    accentColor: "#f97316",
+    bgEmoji: "🍛🪔🌾",
+    screenshot: null,
+  },
+  {
+    id: 4,
+    name: "AIPE Platform",
+    subtitle: "AI Powered Everything",
+    emoji: "🤖",
+    desc: "One intelligent platform to accelerate your career — Resume Analyzer (PDF → AI score), Code Analyzer (bugs + security), Live Interview Coach (WebSocket), and AI Study Planner.",
+    tech: ["React", "Django", "OpenAI GPT-4o", "WebSocket", "Celery", "JWT", "Razorpay"],
+    highlights: ["Resume AI Analyzer", "Code Review AI", "Live Interview Coach", "Study Planner AI", "Real-time Notifications"],
+    githubUrl: "https://github.com/manish780386/AIPE-AI-Powered-Everthing",
+    category: "AI / ML", featured: true,
+    gradient: "from-purple-500 via-violet-500 to-indigo-500",
+    accentColor: "#8b5cf6",
+    bgEmoji: "🤖💻📊",
+    screenshot: null,
   },
 ];
 
-const FILTERS = ["All", "Featured", "React", "Django", "TypeScript"];
+const FILTERS = ["All", "Featured", "Full Stack", "AI / ML", "TypeScript"];
 
 /* ══════════════════════════════════════
    PUBLISHED CARD
@@ -189,10 +222,11 @@ function PublishedCard({ p, i }) {
 }
 
 /* ══════════════════════════════════════
-   PROJECT CARD  — uses <img> tag
+   PROJECT CARD — new advanced design
 ══════════════════════════════════════ */
 function ProjectCard({ p, i }) {
-  const open = url => { if (url) window.open(url, "_blank", "noopener,noreferrer"); };
+  const [hovered, setHovered] = useState(false);
+  const open = url => url && window.open(url, "_blank", "noopener,noreferrer");
 
   return (
     <motion.div
@@ -200,97 +234,156 @@ function ProjectCard({ p, i }) {
       initial={{ opacity: 0, y: 30, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.93 }}
-      transition={{ duration: 0.35, delay: i * 0.06 }}
-      whileHover={{ y: -5 }}
-      className="group relative rounded-2xl bg-white/[0.025] border border-white/[0.07] overflow-hidden flex flex-col"
+      transition={{ duration: 0.4, delay: i * 0.07 }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      whileHover={{ y: -6 }}
+      className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer"
+      style={{
+        background: "rgba(255,255,255,0.025)",
+        border: hovered ? `1px solid ${p.accentColor}40` : "1px solid rgba(255,255,255,0.07)",
+        boxShadow: hovered ? `0 0 40px ${p.accentColor}20` : "none",
+        transition: "border-color 0.3s, box-shadow 0.3s",
+      }}
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-0 group-hover:opacity-[0.04] transition-opacity duration-300 pointer-events-none`} />
+      {/* ── VISUAL HEADER ── */}
+      <div className="relative overflow-hidden" style={{ height: 168 }}>
 
-      {/* ── SCREENSHOT using <img> tag ── */}
-      <div className="relative overflow-hidden" style={{ height: 160 }}>
+        {/* SCREENSHOT or GRADIENT BG */}
         {p.screenshot ? (
-          /* Image from public/screenshots/ folder */
-          <img
-            src={p.screenshot}
-            alt={`${p.name} screenshot`}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          <img src={p.screenshot} alt={p.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
         ) : (
-          /* Placeholder when no screenshot */
-          <div
-            className="w-full h-full flex flex-col items-center justify-center gap-2"
-            style={{ background: `linear-gradient(135deg, ${p.accentColor}10, ${p.accentColor}05)` }}
-          >
-            <span className="text-4xl opacity-40">{p.emoji}</span>
-            <p className="text-[10px] text-gray-700 font-medium">
-              Add image: <code className="text-gray-600">public/screenshots/</code>
-            </p>
+          /* Beautiful gradient with floating emojis */
+          <div className="w-full h-full relative flex items-center justify-center overflow-hidden"
+            style={{ background: `linear-gradient(135deg, ${p.accentColor}18, ${p.accentColor}06)` }}>
+
+            {/* Animated blob */}
+            <motion.div
+              animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute w-48 h-48 rounded-full blur-3xl"
+              style={{ background: `${p.accentColor}25` }}
+            />
+
+            {/* Floating emojis */}
+            {p.bgEmoji.split("").filter(c => c.trim()).map((emoji, ei) => (
+              <motion.span
+                key={ei}
+                className="absolute text-4xl select-none"
+                style={{
+                  left: `${20 + ei * 30}%`,
+                  top: `${25 + (ei % 2) * 30}%`,
+                  filter: "drop-shadow(0 0 12px rgba(0,0,0,0.5))",
+                }}
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, ei % 2 === 0 ? 8 : -8, 0],
+                  opacity: [0.6, 0.9, 0.6],
+                }}
+                transition={{ repeat: Infinity, duration: 3 + ei * 0.8, ease: "easeInOut", delay: ei * 0.4 }}
+              >
+                {emoji}
+              </motion.span>
+            ))}
+
+            {/* Main big emoji */}
+            <motion.span
+              className="relative text-6xl z-10 select-none"
+              style={{ filter: "drop-shadow(0 0 20px rgba(0,0,0,0.6))" }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            >
+              {p.emoji}
+            </motion.span>
           </div>
         )}
 
-        {/* GRADIENT OVERLAY at bottom */}
-        {p.screenshot && (
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f1e]/80 via-transparent to-transparent" />
-        )}
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#04050e]/90 via-[#04050e]/20 to-transparent" />
 
-        {/* LIVE BADGE */}
-        {!p.githubOnly && (
-          <div className="absolute top-2 left-2 flex items-center gap-1 px-2 py-1 rounded-full bg-black/60 border border-green-500/30 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-[9px] text-green-400 font-bold">LIVE</span>
-          </div>
-        )}
+        {/* TOP LINE */}
+        <motion.div
+          className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${p.gradient}`}
+          animate={{ scaleX: hovered ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+          style={{ transformOrigin: "left" }}
+        />
 
         {/* FEATURED BADGE */}
         {p.featured && (
-          <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded-full bg-black/60 border border-yellow-500/30 backdrop-blur-sm">
+          <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-full bg-black/60 border border-yellow-500/30 backdrop-blur-sm">
             <Star size={8} className="text-yellow-400 fill-yellow-400" />
             <span className="text-[9px] text-yellow-400 font-bold">Featured</span>
           </div>
         )}
+
+        {/* CATEGORY BADGE */}
+        <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full bg-black/60 backdrop-blur-sm"
+          style={{ border: `1px solid ${p.accentColor}40` }}>
+          <span className="text-[9px] font-bold" style={{ color: p.accentColor }}>{p.category}</span>
+        </div>
+
+        {/* BOTTOM — title over image */}
+        <div className="absolute bottom-3 left-4 right-4">
+          <p className="text-white font-black text-base leading-tight">{p.name}</p>
+          <p className="text-xs font-medium" style={{ color: p.accentColor }}>{p.subtitle}</p>
+        </div>
       </div>
 
       {/* ── CONTENT ── */}
       <div className="p-5 flex flex-col flex-1">
-        <div className="flex items-start gap-2.5 mb-3">
-          <span className="text-xl leading-none mt-0.5">{p.emoji}</span>
-          <div>
-            <h3 className="text-sm font-bold text-white leading-tight">{p.name}</h3>
-            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md mt-1 inline-block"
-              style={{ background: `${p.accentColor}18`, color: p.accentColor }}>
-              {p.category}
-            </span>
+        <p className="text-gray-500 text-xs leading-relaxed mb-4">{p.desc}</p>
+
+        {/* HIGHLIGHTS */}
+        <div className="mb-4">
+          <p className="text-[10px] text-gray-600 uppercase tracking-widest font-bold mb-2">Key Features</p>
+          <div className="flex flex-wrap gap-1.5">
+            {p.highlights.map((h, hi) => (
+              <span key={hi} className="text-[10px] font-medium px-2 py-0.5 rounded-lg"
+                style={{ background: `${p.accentColor}12`, border: `1px solid ${p.accentColor}25`, color: p.accentColor }}>
+                ▸ {h}
+              </span>
+            ))}
           </div>
         </div>
 
-        <p className="text-gray-500 text-xs leading-relaxed mb-4 flex-1">{p.desc}</p>
-
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {p.tech.map((t, idx) => (
-            <span key={idx} className="px-2.5 py-1 bg-white/[0.04] rounded-lg text-[10px] text-gray-400 border border-white/[0.05]">{t}</span>
+        {/* TECH STACK */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {p.tech.map((t, ti) => (
+            <span key={ti} className="px-2 py-0.5 bg-white/[0.04] rounded-md text-[10px] text-gray-500 border border-white/[0.05]">
+              {t}
+            </span>
           ))}
         </div>
 
+        {/* ACTIONS */}
         <div className="flex gap-2 mt-auto">
-          {!p.githubOnly ? (
-            <button onClick={() => open(p.liveUrl)}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-xs font-bold hover:shadow-lg hover:scale-105 transition-all"
-              style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}88)` }}>
-              <ExternalLink size={12} /> Live Demo
-            </button>
-          ) : (
-            <button onClick={() => open(p.githubUrl)}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-xs font-bold hover:shadow-lg hover:scale-105 transition-all"
-              style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}88)` }}>
-              <Code2 size={12} /> View Code
-            </button>
-          )}
-          <button onClick={() => open(p.githubUrl)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-white/10 text-gray-400 text-xs font-medium hover:text-white hover:border-white/25 transition">
-            <Github size={12} /> GitHub
-          </button>
+          <motion.button
+            whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+            onClick={() => open(p.githubUrl)}
+            className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-xs font-bold transition-all"
+            style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}99)` }}
+          >
+            <Github size={13} /> View on GitHub
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            onClick={() => open(p.githubUrl)}
+            className="px-4 py-2.5 rounded-xl border border-white/10 text-gray-400 text-xs hover:text-white hover:border-white/25 transition flex items-center gap-1.5"
+          >
+            <Code2 size={12} /> Code
+          </motion.button>
         </div>
       </div>
+
+      {/* BOTTOM ACCENT */}
+      <motion.div
+        className={`absolute bottom-0 left-0 h-[1.5px] bg-gradient-to-r ${p.gradient}`}
+        animate={{ scaleX: hovered ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+        style={{ transformOrigin: "left" }}
+      />
     </motion.div>
   );
 }
@@ -332,9 +425,8 @@ export default function Projects() {
           <div className="flex items-center gap-4 mb-6">
             <span className="text-sm font-black text-white uppercase tracking-widest">Web Projects</span>
             <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
+            <span className="text-[11px] text-gray-600">{PROJECTS.length} projects</span>
           </div>
-
-          
 
           {/* FILTERS */}
           <div className="flex flex-wrap gap-2 mb-8">
@@ -352,7 +444,7 @@ export default function Projects() {
           </div>
 
           {/* GRID */}
-          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
             <AnimatePresence mode="popLayout">
               {filtered.map((p, i) => <ProjectCard key={p.id} p={p} i={i} />)}
             </AnimatePresence>
@@ -361,8 +453,8 @@ export default function Projects() {
 
         <div className="text-center mt-12">
           <motion.a href="https://github.com/manish780386" target="_blank" rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 text-sm text-gray-400 hover:text-white hover:border-white/20 transition">
+            whileHover={{ scale: 1.04, boxShadow: "0 0 30px rgba(6,182,212,0.2)" }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cyan-500/25 text-sm text-gray-400 hover:text-cyan-400 hover:border-cyan-500/50 transition">
             <Github size={15} /> View All on GitHub →
           </motion.a>
         </div>

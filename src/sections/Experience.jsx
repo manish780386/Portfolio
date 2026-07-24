@@ -157,7 +157,7 @@ export default function Experience() {
               </p>
               <div className="grid grid-cols-2 gap-3 mt-5">
                 <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.05] text-center">
-                  <div className="text-lg font-bold text-white font-mono-label">8.48</div>
+                  <div className="text-lg font-bold text-white font-mono-label">8.6</div>
                   <div className="text-[10px] text-[#7c8aa0] mt-0.5">CGPA / 10</div>
                 </div>
                 <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.05] text-center">
