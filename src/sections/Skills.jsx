@@ -6,14 +6,8 @@ import {
 } from "lucide-react";
 import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
 
-/* Shared "shield/badge" outline used by HTML5 + CSS3 — this trapezoid-with-
-   a-point silhouette is the actual shape both real logos use. */
 const BADGE_PATH = "M4 2 L20 2 L18.5 20.2 L12 22.5 L5.5 20.2 Z";
 
-/* Real brand marks where a proper flat logo exists; lucide icons (tinted to
-   the brand color via currentColor) fill in for tools without a simple
-   single-color mark. Every entry carries a `glow` used for the hover glow
-   behind the icon and to tint lucide icons. */
 const META = {
   Python: { glow: "#3776AB", icon: <svg viewBox="0 0 24 24"><path fill="#3776AB" d="M11.97 2c-1.2.01-2.34.1-3.35.28C6.27 2.66 6 3.64 6 4.95v1.8h6.19v.6H4.19c-1.28 0-2.4.77-2.75 2.24-.41 1.68-.43 2.73 0 4.49.32 1.31 1.08 2.24 2.36 2.24H5.2v-2.15c0-1.45 1.26-2.73 2.76-2.73h6.17c1.23 0 2.2-1.01 2.2-2.24V4.95c0-1.2-.98-2.09-2.2-2.28-.77-.11-1.97-.17-2.16-.17z" /><path fill="#FFD43B" d="M17.61 7.35v2.09c0 1.51-1.28 2.77-2.76 2.77H8.67c-1.21 0-2.2 1.04-2.2 2.24v4.2c0 1.19 1.04 1.89 2.2 2.23 1.39.41 2.73.48 4.4 0 1.1-.31 2.2-1 2.2-2.23V17h-6.2v-.6h8.87c1.28 0 1.76-.89 2.2-2.24.46-1.39.44-2.73 0-4.49-.31-1.28-1.07-2.24-2.35-2.24h-.18v-.08z" /></svg> },
   Java: { glow: "#f89820", icon: <Coffee size={19} /> },
@@ -51,7 +45,6 @@ const META = {
   "Network Security": { glow: "#ef4444", icon: <ShieldCheck size={19} /> },
 };
 
-/* Flat, no category grouping, no percentage rendered. */
 const SKILLS = [
   "Python", "Java", "JavaScript", "TypeScript", "Node.js", "HTML", "CSS",
   "Tailwind CSS", "React", "React Native",
@@ -65,7 +58,6 @@ const SKILLS = [
 
 function SkillCard({ name, i }) {
   const meta = META[name];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -75,7 +67,6 @@ function SkillCard({ name, i }) {
       whileHover={{ y: -5 }}
       className="group relative p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.16] transition-colors flex flex-col items-center text-center gap-2.5 overflow-hidden"
     >
-      {/* colored glow that blooms in on hover, tinted per-skill */}
       <div
         className="absolute -inset-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-2xl pointer-events-none"
         style={{ background: `radial-gradient(circle at 50% 30%, ${meta?.glow || "#34d399"}33, transparent 70%)` }}
@@ -100,9 +91,75 @@ export default function Skills() {
         <SectionTitle index="05" label="What I know" main="Technical" accent="skills" />
         <SectionSubtitle>Tools I actually reach for, day to day.</SectionSubtitle>
 
+        {/* ── SKILL GRID — unchanged ── */}
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
           {SKILLS.map((name, i) => <SkillCard key={name} name={name} i={i} />)}
         </div>
+
+        {/* ── DEVROUTE CARD — below skills ── */}
+        <motion.a
+          href="https://dev-route.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          whileHover={{ y: -4, scale: 1.012 }}
+          className="group relative mt-12 rounded-2xl overflow-hidden block"
+          style={{
+            background: "rgba(255,255,255,0.025)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          {/* Top accent line */}
+          <div className="h-[2px] w-full bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-500" />
+
+          {/* Hover glow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/8 via-indigo-500/4 to-purple-500/8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+          <div className="p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6">
+
+            {/* Icon */}
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0"
+              style={{ background: "rgba(6,182,212,0.1)", border: "1px solid rgba(6,182,212,0.2)" }}
+            >
+              🚀
+            </motion.div>
+
+            {/* Text */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2.5 flex-wrap mb-1.5">
+                <h3 className="text-white font-black text-lg">DevRoute</h3>
+                <span className="px-2 py-0.5 rounded-full bg-green-500/15 border border-green-500/25 text-green-400 text-[10px] font-bold flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  LIVE
+                </span>
+              </div>
+              <p className="text-[#8c959f] text-sm leading-relaxed">
+                Career &amp; placement prep platform for tech students — 15+ courses, 8 visual roadmaps
+                (Frontend, Backend, DevOps, ML and more), 60+ CS interview Q&amp;A, timed mock quizzes,
+                and an advanced MP College Finder with interactive map. Built entirely using the skills above.
+              </p>
+            </div>
+
+            {/* CTA */}
+            <motion.div
+              whileHover={{ scale: 1.06 }}
+              className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl text-white text-sm font-bold"
+              style={{ background: "linear-gradient(135deg, #06b6d4, #6366f1)" }}
+            >
+              Visit Site
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </motion.div>
+
+          </div>
+        </motion.a>
+
       </div>
     </SectionWrapper>
   );
