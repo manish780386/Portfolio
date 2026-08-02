@@ -123,7 +123,8 @@ export default function Hero() {
               {/* PHOTO */}
               <div className="p-5 flex flex-col items-center">
                 <div className="w-24 h-24 rounded-xl overflow-hidden border border-white/10 mb-4">
-                  <img src={manish} alt="Manish Dange" className="w-full h-full object-cover" />
+                  <img src={manish} alt="Manish Dange" className="w-full h-full object-cover"  loading="lazy"         
+  decoding="async" />
                 </div>
                 <p className="text-white font-semibold text-base">Manish Dange</p>
                 <p className="text-[#4b5768] text-[11px] font-mono-label mt-0.5">ID · FULLSTACK-SEC</p>

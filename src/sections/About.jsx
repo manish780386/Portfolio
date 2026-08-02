@@ -86,7 +86,8 @@ export default function About() {
             <div className="relative">
               <div className="absolute -inset-3 bg-gradient-to-br from-[#34d399]/10 to-[#60a5fa]/10 rounded-3xl blur-2xl" />
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/10">
-                <img src={manish} alt="Manish Dange" className="w-full h-full object-cover" />
+                <img src={manish} alt="Manish Dange" className="w-full h-full object-cover"  loading="lazy"    
+  decoding="async" />
               </div>
             </div>
             <div className="mt-4 space-y-2">

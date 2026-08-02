@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from "react";
 
 export default function ParticleField() {
+
+  
   const canvasRef = useRef(null);
+
+ 
 
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -57,4 +61,6 @@ export default function ParticleField() {
   }, []);
 
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-60" aria-hidden="true" />;
+
+  
 }

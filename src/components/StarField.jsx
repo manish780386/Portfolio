@@ -1,5 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+
+/* ─── detect mobile once ─── */
+const IS_MOBILE = typeof window !== "undefined" && window.innerWidth < 768;
+const IS_TABLET = typeof window !== "undefined" && window.innerWidth < 1024;
 
 /* ─── MOON ─────────────────────────────────────── */
 function Moon() {
@@ -16,17 +20,16 @@ function Moon() {
           "0 0 90px 10px rgba(226,232,240,0.10), inset -22px -18px 40px rgba(0,0,0,0.45)",
       }}
     >
-      {/* glow ring around moon */}
-      <motion.div
-        animate={{ opacity: [0.3, 0.6, 0.3] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-        className="absolute inset-[-20px] rounded-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(226,232,240,0.08) 0%, transparent 70%)",
-        }}
-      />
-      {/* craters */}
+      {!IS_MOBILE && (
+        <motion.div
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          className="absolute inset-[-20px] rounded-full pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, rgba(226,232,240,0.08) 0%, transparent 70%)",
+          }}
+        />
+      )}
       <span className="absolute w-7 h-7 rounded-full bg-black/10 top-10 left-14 blur-[1px]" />
       <span className="absolute w-4 h-4 rounded-full bg-black/10 top-24 left-8 blur-[1px]" />
       <span className="absolute w-10 h-10 rounded-full bg-black/10 top-16 left-28 blur-[1px]" />
@@ -50,16 +53,16 @@ function Sun() {
           filter: "blur(2px)",
         }}
       />
-      {/* sun corona pulse */}
-      <motion.div
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
-        className="absolute bottom-[-8rem] left-[-7rem] w-80 h-80 rounded-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255,213,138,0.15) 0%, transparent 65%)",
-        }}
-      />
+      {!IS_MOBILE && (
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+          className="absolute bottom-[-8rem] left-[-7rem] w-80 h-80 rounded-full pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, rgba(255,213,138,0.15) 0%, transparent 65%)",
+          }}
+        />
+      )}
     </>
   );
 }
@@ -74,30 +77,15 @@ function Planet({ className, size, colors, ring, delay = 0, duration = 9 }) {
     >
       <div className="relative" style={{ width: size, height: size }}>
         {ring && (
-          <>
-            <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border pointer-events-none"
-              style={{
-                width: size * 2.1,
-                height: size * 0.62,
-                borderColor: ring,
-                transform: "translate(-50%,-50%) rotate(-18deg)",
-              }}
-            />
-            {/* ring glow */}
-            <motion.div
-              animate={{ opacity: [0.3, 0.7, 0.3] }}
-              transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-              className="absolute left-1/2 top-1/2 rounded-full pointer-events-none"
-              style={{
-                width: size * 2.2,
-                height: size * 0.65,
-                background: `radial-gradient(ellipse, ${ring} 0%, transparent 70%)`,
-                transform: "translate(-50%,-50%) rotate(-18deg)",
-                filter: "blur(3px)",
-              }}
-            />
-          </>
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border pointer-events-none"
+            style={{
+              width: size * 2.1,
+              height: size * 0.62,
+              borderColor: ring,
+              transform: "translate(-50%,-50%) rotate(-18deg)",
+            }}
+          />
         )}
         <div
           className="w-full h-full rounded-full"
@@ -105,84 +93,78 @@ function Planet({ className, size, colors, ring, delay = 0, duration = 9 }) {
             background: `radial-gradient(circle at 32% 30%, ${colors[0]}, ${colors[1]} 60%, ${colors[2]} 100%)`,
           }}
         />
-        {/* planet shimmer */}
-        <motion.div
-          animate={{ opacity: [0.15, 0.35, 0.15] }}
-          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-          className="absolute inset-0 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle at 25% 25%, rgba(255,255,255,0.3) 0%, transparent 50%)",
-          }}
-        />
+        {!IS_MOBILE && (
+          <motion.div
+            animate={{ opacity: [0.15, 0.35, 0.15] }}
+            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            className="absolute inset-0 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle at 25% 25%, rgba(255,255,255,0.3) 0%, transparent 50%)",
+            }}
+          />
+        )}
       </div>
     </motion.div>
   );
 }
 
-/* ─── AURORA ────────────────────────────────────── */
+/* ─── AURORA — desktop only ─────────────────────── */
 function Aurora() {
+  if (IS_MOBILE) return null;
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* aurora band 1 */}
       <motion.div
-        animate={{
-          opacity: [0, 0.12, 0.06, 0.14, 0],
-          scaleX: [1, 1.08, 0.96, 1.04, 1],
-          y: [0, -10, 5, -8, 0],
-        }}
+        animate={{ opacity: [0, 0.12, 0.06, 0.14, 0], scaleX: [1, 1.08, 0.96, 1.04, 1], y: [0, -10, 5, -8, 0] }}
         transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
         className="absolute top-[15%] left-[-10%] right-[-10%] h-28 rounded-full"
         style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, rgba(52,211,153,0.6) 40%, rgba(96,165,250,0.4) 70%, transparent 100%)",
+          background: "linear-gradient(180deg, transparent 0%, rgba(52,211,153,0.6) 40%, rgba(96,165,250,0.4) 70%, transparent 100%)",
           filter: "blur(18px)",
         }}
       />
-      {/* aurora band 2 */}
       <motion.div
-        animate={{
-          opacity: [0, 0.08, 0.13, 0.05, 0],
-          scaleX: [1, 0.94, 1.1, 0.98, 1],
-          y: [0, 12, -6, 10, 0],
-        }}
+        animate={{ opacity: [0, 0.08, 0.13, 0.05, 0], scaleX: [1, 0.94, 1.1, 0.98, 1], y: [0, 12, -6, 10, 0] }}
         transition={{ repeat: Infinity, duration: 16, ease: "easeInOut", delay: 3 }}
         className="absolute top-[22%] left-[-5%] right-[-5%] h-20 rounded-full"
         style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, rgba(168,85,247,0.5) 40%, rgba(52,211,153,0.3) 70%, transparent 100%)",
+          background: "linear-gradient(180deg, transparent 0%, rgba(168,85,247,0.5) 40%, rgba(52,211,153,0.3) 70%, transparent 100%)",
           filter: "blur(22px)",
         }}
       />
-      {/* aurora band 3 — subtle */}
-      <motion.div
-        animate={{
-          opacity: [0, 0.06, 0.1, 0.04, 0],
-          y: [0, -6, 8, -4, 0],
-        }}
-        transition={{ repeat: Infinity, duration: 20, ease: "easeInOut", delay: 7 }}
-        className="absolute top-[10%] left-[20%] right-[10%] h-16 rounded-full"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, rgba(99,102,241,0.5) 50%, transparent 100%)",
-          filter: "blur(16px)",
-        }}
-      />
+      {!IS_TABLET && (
+        <motion.div
+          animate={{ opacity: [0, 0.06, 0.1, 0.04, 0], y: [0, -6, 8, -4, 0] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "easeInOut", delay: 7 }}
+          className="absolute top-[10%] left-[20%] right-[10%] h-16 rounded-full"
+          style={{
+            background: "linear-gradient(180deg, transparent 0%, rgba(99,102,241,0.5) 50%, transparent 100%)",
+            filter: "blur(16px)",
+          }}
+        />
+      )}
     </div>
   );
 }
 
-/* ─── FLOATING PARTICLES ────────────────────────── */
+/* ─── FLOATING PARTICLES — desktop only ─────────── */
 function FloatingParticles() {
-  const particles = Array.from({ length: 18 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: 1 + Math.random() * 2.5,
-    duration: 6 + Math.random() * 10,
-    delay: Math.random() * 8,
-    color: i % 3 === 0 ? "#34d399" : i % 3 === 1 ? "#60a5fa" : "#a78bfa",
-  }));
+  if (IS_MOBILE) return null;
+
+  const count = IS_TABLET ? 8 : 18;
+  const particles = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 1 + Math.random() * 2.5,
+        duration: 6 + Math.random() * 10,
+        delay: Math.random() * 8,
+        color: i % 3 === 0 ? "#34d399" : i % 3 === 1 ? "#60a5fa" : "#a78bfa",
+      })),
+    []
+  );
 
   return (
     <div className="absolute inset-0 pointer-events-none">
@@ -198,24 +180,15 @@ function FloatingParticles() {
             background: p.color,
             boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
           }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0, 0.8, 0],
-            scale: [0.5, 1.2, 0.5],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: p.duration,
-            delay: p.delay,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, -30, 0], opacity: [0, 0.8, 0], scale: [0.5, 1.2, 0.5] }}
+          transition={{ repeat: Infinity, duration: p.duration, delay: p.delay, ease: "easeInOut" }}
         />
       ))}
     </div>
   );
 }
 
-/* ─── MOUSE PARALLAX WRAPPER ────────────────────── */
+/* ─── MOUSE PARALLAX — desktop only ─────────────── */
 function ParallaxLayer({ children, strength = 0.02, className = "" }) {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -223,13 +196,12 @@ function ParallaxLayer({ children, strength = 0.02, className = "" }) {
   const y  = useSpring(my, { stiffness: 60, damping: 20 });
 
   useEffect(() => {
+    if (IS_MOBILE) return;
     const move = (e) => {
-      const cx = e.clientX - window.innerWidth  / 2;
-      const cy = e.clientY - window.innerHeight / 2;
-      mx.set(cx * strength);
-      my.set(cy * strength);
+      mx.set((e.clientX - window.innerWidth  / 2) * strength);
+      my.set((e.clientY - window.innerHeight / 2) * strength);
     };
-    window.addEventListener("mousemove", move);
+    window.addEventListener("mousemove", move, { passive: true });
     return () => window.removeEventListener("mousemove", move);
   }, [mx, my, strength]);
 
@@ -240,10 +212,9 @@ function ParallaxLayer({ children, strength = 0.02, className = "" }) {
   );
 }
 
-/* ─── MAIN STAR FIELD CANVAS ────────────────────── */
+/* ─── MAIN CANVAS ────────────────────────────────── */
 export default function StarField() {
   const canvasRef = useRef(null);
-  const [showComet, setShowComet] = useState(false);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -252,42 +223,41 @@ export default function StarField() {
     let W = (canvas.width  = window.innerWidth);
     let H = (canvas.height = window.innerHeight);
 
-    /* ── star factory ── */
-    const mkStars = (n, speedRange, sizeRange, colorVariants = null) =>
-      Array.from({ length: n }, () => {
-        const cv = colorVariants
-          ? colorVariants[Math.floor(Math.random() * colorVariants.length)]
-          : "226,232,240";
-        return {
-          x:     Math.random() * W,
-          y:     Math.random() * H,
-          r:     sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]),
-          baseA: 0.3 + Math.random() * 0.65,
-          phase: Math.random() * Math.PI * 2,
-          speed: speedRange[0] + Math.random() * (speedRange[1] - speedRange[0]),
-          color: cv,
-          twinkleAmp: 0.3 + Math.random() * 0.5,
-        };
-      });
+    /* ── star counts — dramatically fewer on mobile ── */
+    const COUNTS = IS_MOBILE
+      ? { dust: 40, far: 30, mid: 20, near: 10 }
+      : IS_TABLET
+      ? { dust: 100, far: 70, mid: 45, near: 25 }
+      : { dust: 180, far: 140, mid: 80, near: 45 };
 
-    /* star color variants — mostly white, some tinted */
-    const starColors = ["226,232,240", "226,232,240", "226,232,240",
-                        "200,220,255", "255,230,200", "180,255,220"];
+    const mkStars = (n, speedRange, sizeRange, colorVariants) =>
+      Array.from({ length: n }, () => ({
+        x:    Math.random() * W,
+        y:    Math.random() * H,
+        r:    sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]),
+        baseA: 0.3 + Math.random() * 0.65,
+        phase: Math.random() * Math.PI * 2,
+        speed: speedRange[0] + Math.random() * (speedRange[1] - speedRange[0]),
+        color: colorVariants[Math.floor(Math.random() * colorVariants.length)],
+        twinkleAmp: 0.3 + Math.random() * 0.5,
+      }));
 
-    const dust = mkStars(180, [0.2, 0.5], [0.2, 0.6], starColors);
-    const far  = mkStars(140, [0.4, 0.9], [0.4, 1.1], starColors);
-    const mid  = mkStars(80,  [0.8, 1.5], [0.8, 1.7], starColors);
-    const near = mkStars(45,  [1.2, 2.4], [1.2, 2.6], starColors);
+    const starColors = ["226,232,240","226,232,240","226,232,240","200,220,255","255,230,200","180,255,220"];
 
-    /* ── constellation — simple triangle of 3 near-stars ── */
-    const constellationStars = [
+    const dust = mkStars(COUNTS.dust, [0.2, 0.5], [0.2, 0.6], starColors);
+    const far  = mkStars(COUNTS.far,  [0.4, 0.9], [0.4, 1.1], starColors);
+    const mid  = mkStars(COUNTS.mid,  [0.8, 1.5], [0.8, 1.7], starColors);
+    const near = mkStars(COUNTS.near, [1.2, 2.4], [1.2, 2.6], starColors);
+
+    /* constellation — skip on mobile */
+    const constellationStars = IS_MOBILE ? [] : [
       { x: W * 0.28, y: H * 0.18 },
       { x: W * 0.34, y: H * 0.10 },
       { x: W * 0.40, y: H * 0.20 },
       { x: W * 0.34, y: H * 0.28 },
     ];
 
-    /* ── meteors pool ── */
+    /* meteors — slower interval on mobile */
     const meteors = [];
     const spawnMeteor = () => {
       if (reduced) return;
@@ -302,27 +272,39 @@ export default function StarField() {
       });
     };
 
-    /* spawn meteors frequently */
+    const meteorInterval = IS_MOBILE ? 6000 : IS_TABLET ? 4000 : 2800;
+    const meteorChance   = IS_MOBILE ? 0.5  : 0.7;
+
     const meteorTimer = reduced ? null : setInterval(() => {
-      if (Math.random() < 0.7) spawnMeteor();
-      if (Math.random() < 0.2) spawnMeteor(); // occasional double
-    }, 2800);
+      if (Math.random() < meteorChance) spawnMeteor();
+      if (!IS_MOBILE && Math.random() < 0.2) spawnMeteor();
+    }, meteorInterval);
 
-    /* ── nebula cloud positions (static, drawn each frame) ── */
-    const nebulae = [
-      { x: W * 0.15, y: H * 0.35, rx: 180, ry: 80,  color: "52,211,153",  a: 0.035 },
-      { x: W * 0.70, y: H * 0.20, rx: 140, ry: 60,  color: "96,165,250",  a: 0.03  },
-      { x: W * 0.50, y: H * 0.70, rx: 200, ry: 90,  color: "168,85,247",  a: 0.025 },
-    ];
+    /* nebulae — fewer on mobile */
+    const nebulae = IS_MOBILE
+      ? [{ x: W * 0.15, y: H * 0.35, rx: 120, ry: 50, color: "52,211,153", a: 0.025 }]
+      : [
+          { x: W * 0.15, y: H * 0.35, rx: 180, ry: 80,  color: "52,211,153",  a: 0.035 },
+          { x: W * 0.70, y: H * 0.20, rx: 140, ry: 60,  color: "96,165,250",  a: 0.03  },
+          { x: W * 0.50, y: H * 0.70, rx: 200, ry: 90,  color: "168,85,247",  a: 0.025 },
+        ];
 
-    let t  = 0;
-    let raf;
+    let t = 0, raf;
+
+    /* use lower frame rate on mobile via skip-frame */
+    let frameSkip = 0;
+    const SKIP = IS_MOBILE ? 1 : 0; // draw every 2nd frame on mobile
 
     const draw = () => {
+      raf = requestAnimationFrame(draw);
+      frameSkip++;
+      if (frameSkip <= SKIP) return;
+      frameSkip = 0;
+
       t += reduced ? 0 : 0.016;
       ctx.clearRect(0, 0, W, H);
 
-      /* ── nebulae (pulsing) ── */
+      /* nebulae */
       nebulae.forEach((n) => {
         const pulse = 1 + 0.15 * Math.sin(t * 0.4 + n.x);
         const grad  = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.rx * pulse);
@@ -338,14 +320,14 @@ export default function StarField() {
         ctx.restore();
       });
 
-      /* ── stars (4 layers) ── */
+      /* stars */
       [dust, far, mid, near].forEach((layer) => {
         layer.forEach((s) => {
           const wave = reduced ? 0 : s.twinkleAmp * Math.sin(t * s.speed + s.phase);
           const a    = Math.max(0.05, Math.min(1, s.baseA + wave));
 
-          /* glow for bright near-stars */
-          if (s.r > 1.6 && !reduced) {
+          /* glow only on desktop */
+          if (s.r > 1.6 && !reduced && !IS_MOBILE) {
             const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
             g.addColorStop(0, `rgba(${s.color},${a * 0.5})`);
             g.addColorStop(1, `rgba(${s.color},0)`);
@@ -360,22 +342,20 @@ export default function StarField() {
           ctx.fillStyle = `rgba(${s.color},${a})`;
           ctx.fill();
 
-          /* cross-spike for brightest stars */
-          if (s.r > 2 && !reduced) {
+          /* cross-spike desktop only */
+          if (s.r > 2 && !reduced && !IS_MOBILE) {
             ctx.strokeStyle = `rgba(${s.color},${a * 0.35})`;
             ctx.lineWidth   = 0.5;
             ctx.beginPath();
-            ctx.moveTo(s.x - s.r * 4, s.y);
-            ctx.lineTo(s.x + s.r * 4, s.y);
-            ctx.moveTo(s.x, s.y - s.r * 4);
-            ctx.lineTo(s.x, s.y + s.r * 4);
+            ctx.moveTo(s.x - s.r * 4, s.y); ctx.lineTo(s.x + s.r * 4, s.y);
+            ctx.moveTo(s.x, s.y - s.r * 4); ctx.lineTo(s.x, s.y + s.r * 4);
             ctx.stroke();
           }
         });
       });
 
-      /* ── constellation lines ── */
-      if (!reduced) {
+      /* constellation — desktop only */
+      if (!reduced && constellationStars.length > 0) {
         const conA = 0.12 + 0.06 * Math.sin(t * 0.3);
         ctx.strokeStyle = `rgba(52,211,153,${conA})`;
         ctx.lineWidth   = 0.6;
@@ -388,8 +368,6 @@ export default function StarField() {
         ctx.closePath();
         ctx.stroke();
         ctx.setLineDash([]);
-
-        /* constellation dots */
         constellationStars.forEach((s) => {
           const da = 0.5 + 0.4 * Math.sin(t * 0.8 + s.x);
           ctx.beginPath();
@@ -399,7 +377,7 @@ export default function StarField() {
         });
       }
 
-      /* ── meteors ── */
+      /* meteors */
       for (let i = meteors.length - 1; i >= 0; i--) {
         const m = meteors[i];
         m.life++;
@@ -412,10 +390,11 @@ export default function StarField() {
 
         const grad = ctx.createLinearGradient(
           m.x, m.y,
-          m.x - m.vx * tailLen / m.vx, m.y - m.vy * tailLen / m.vx
+          m.x - m.vx * tailLen / m.vx,
+          m.y - m.vy * tailLen / m.vx
         );
-        grad.addColorStop(0, `rgba(${m.hue},${0.95 * fadeA})`);
-        grad.addColorStop(0.4, `rgba(${m.hue},${0.5 * fadeA})`);
+        grad.addColorStop(0,   `rgba(${m.hue},${0.95 * fadeA})`);
+        grad.addColorStop(0.4, `rgba(${m.hue},${0.5  * fadeA})`);
         grad.addColorStop(1,   `rgba(${m.hue},0)`);
 
         ctx.strokeStyle = grad;
@@ -426,20 +405,20 @@ export default function StarField() {
         ctx.lineTo(m.x - m.vx * tailLen / m.vx, m.y - m.vy * tailLen / m.vx);
         ctx.stroke();
 
-        /* head glow */
-        const hg = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, 5);
-        hg.addColorStop(0, `rgba(${m.hue},${0.9 * fadeA})`);
-        hg.addColorStop(1, `rgba(${m.hue},0)`);
-        ctx.beginPath();
-        ctx.arc(m.x, m.y, 5, 0, Math.PI * 2);
-        ctx.fillStyle = hg;
-        ctx.fill();
+        /* head glow — skip on mobile */
+        if (!IS_MOBILE) {
+          const hg = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, 5);
+          hg.addColorStop(0, `rgba(${m.hue},${0.9 * fadeA})`);
+          hg.addColorStop(1, `rgba(${m.hue},0)`);
+          ctx.beginPath();
+          ctx.arc(m.x, m.y, 5, 0, Math.PI * 2);
+          ctx.fillStyle = hg;
+          ctx.fill();
+        }
 
         if (m.life > m.max || m.x > W + 50 || m.y > H + 50)
           meteors.splice(i, 1);
       }
-
-      raf = requestAnimationFrame(draw);
     };
 
     draw();
@@ -448,7 +427,7 @@ export default function StarField() {
       W = canvas.width  = window.innerWidth;
       H = canvas.height = window.innerHeight;
     };
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", resize, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
@@ -458,50 +437,49 @@ export default function StarField() {
   }, []);
 
   return (
-    <div
-      className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
-      aria-hidden="true"
-    >
-      {/* ── deep space gradient ── */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 120% 80% at 50% -10%, #0c1a1f 0%, #060a11 55%)",
-        }}
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+
+      {/* deep space */}
+      <div className="absolute inset-0"
+        style={{ background: "radial-gradient(ellipse 120% 80% at 50% -10%, #0c1a1f 0%, #060a11 55%)" }}
       />
 
-      {/* ── nebula static blobs ── */}
+      {/* nebula blobs — fewer & smaller on mobile */}
       <motion.div
         animate={{ scale: [1, 1.08, 1], opacity: [0.08, 0.14, 0.08] }}
         transition={{ repeat: Infinity, duration: 9, ease: "easeInOut" }}
-        className="absolute w-[600px] h-[600px] rounded-full blur-[160px] bg-[#34d399] top-[-10%] left-[-5%]"
+        className={`absolute rounded-full bg-[#34d399] top-[-10%] left-[-5%] ${
+          IS_MOBILE ? "w-[300px] h-[300px] blur-[100px]" : "w-[600px] h-[600px] blur-[160px]"
+        }`}
       />
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.06, 0.12, 0.06] }}
         transition={{ repeat: Infinity, duration: 11, ease: "easeInOut", delay: 2.5 }}
-        className="absolute w-[500px] h-[500px] rounded-full blur-[160px] bg-[#60a5fa] bottom-[-15%] right-[-5%]"
+        className={`absolute rounded-full bg-[#60a5fa] bottom-[-15%] right-[-5%] ${
+          IS_MOBILE ? "w-[250px] h-[250px] blur-[80px]" : "w-[500px] h-[500px] blur-[160px]"
+        }`}
       />
-      <motion.div
-        animate={{ scale: [1, 1.06, 1], opacity: [0.04, 0.09, 0.04] }}
-        transition={{ repeat: Infinity, duration: 14, ease: "easeInOut", delay: 5 }}
-        className="absolute w-[400px] h-[400px] rounded-full blur-[140px] bg-[#a78bfa] top-[30%] right-[20%]"
-      />
+      {!IS_MOBILE && (
+        <motion.div
+          animate={{ scale: [1, 1.06, 1], opacity: [0.04, 0.09, 0.04] }}
+          transition={{ repeat: Infinity, duration: 14, ease: "easeInOut", delay: 5 }}
+          className="absolute w-[400px] h-[400px] rounded-full blur-[140px] bg-[#a78bfa] top-[30%] right-[20%]"
+        />
+      )}
 
-      {/* ── aurora bands ── */}
+      {/* aurora — desktop only */}
       <Aurora />
 
-      {/* ── floating dust particles ── */}
+      {/* floating particles — desktop only */}
       <FloatingParticles />
 
-      {/* ── celestial bodies with mouse parallax ── */}
+      {/* celestial bodies */}
       <ParallaxLayer strength={0.012}>
         <Moon />
         <Sun />
       </ParallaxLayer>
 
       <ParallaxLayer strength={0.022}>
-        {/* Saturn-like planet */}
         <Planet
           className="hidden md:block left-[8%] top-[62%]"
           size={30}
@@ -509,7 +487,6 @@ export default function StarField() {
           ring="rgba(247,201,140,0.35)"
           duration={10}
         />
-        {/* ice planet */}
         <Planet
           className="hidden lg:block right-[12%] top-[30%]"
           size={16}
@@ -520,7 +497,6 @@ export default function StarField() {
       </ParallaxLayer>
 
       <ParallaxLayer strength={0.035}>
-        {/* extra tiny planet */}
         <Planet
           className="hidden xl:block left-[55%] top-[75%]"
           size={10}
@@ -530,13 +506,13 @@ export default function StarField() {
         />
       </ParallaxLayer>
 
-      {/* ── canvas (stars + meteors + constellations) ── */}
+      {/* canvas */}
       <canvas ref={canvasRef} className="absolute inset-0" />
 
-      {/* ── subtle vignette ── */}
+      {/* vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_40%,transparent_35%,#060a11_100%)]" />
 
-      {/* ── top edge gradient for readability ── */}
+      {/* top fade */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#060a11]/60 to-transparent" />
     </div>
   );
