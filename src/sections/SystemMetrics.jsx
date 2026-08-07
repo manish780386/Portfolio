@@ -21,11 +21,11 @@ const METRICS = [
     detail: "Cyber security, AI and dev-tooling credentials.",
   },
   {
-    value: 100, suffix: "+", label: "VS Code Installs",
+    value: 120, suffix: "+", label: "VS Code Installs",
     detail: "\"JSON Tree Visualizer Pro\" — live on the Marketplace.",
   },
   {
-    value: 450, suffix: "+", label: "GitHub Commits",
+    value: 550, suffix: "+", label: "GitHub Commits",
     detail: "Shipped across 40 public repositories.",
   },
 ];

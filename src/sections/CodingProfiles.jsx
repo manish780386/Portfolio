@@ -17,7 +17,7 @@ const GH_URL = "https://github.com/manish780386";
 const LC_URL = "https://leetcode.com/u/dangemanish/";
 
 const STATIC_PLATFORMS = [
-  { name: "HackerRank",    handle: "@dangemanish35", solved: 82,  note: "3★ Python · PS · SQL",     url: "https://www.hackerrank.com/profile/dangemanish35",       color: "#22c55e", glow: "#22c55e", icon: "🏅" },
+  { name: "HackerRank",    handle: "@dangemanish35", solved: 95,  note: "3★ Python · PS · SQL",     url: "https://www.hackerrank.com/profile/dangemanish35",       color: "#22c55e", glow: "#22c55e", icon: "🏅" },
   { name: "CodeChef",      handle: "@dange_123",     solved: 66,  note: "Rookie League · Growing",  url: "https://www.codechef.com/users/dange_123",               color: "#f97316", glow: "#f97316", icon: "👨‍🍳" },
   { name: "GeeksforGeeks", handle: "@dangema54zd",   solved: 40,  note: "Score 350+ · SVVV Indore", url: "https://www.geeksforgeeks.org/profile/dangema54zd",      color: "#16a34a", glow: "#16a34a", icon: "🟢" },
   { name: "Codolio",       handle: "@manishdange",   solved: null, note: "All-in-one dashboard",   url: "https://codolio.com/profile/manishdange",                color: "#a855f7", glow: "#a855f7", icon: "🦉" },
