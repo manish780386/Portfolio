@@ -331,7 +331,7 @@ export default function CodingProfiles() {
                       {[
                         { label: "Acceptance",  val: `${lc.acceptanceRate}%`, c: "text-green-400"  },
                         { label: "Rank",        val: `#${lc.ranking}`,        c: "text-blue-400"   },
-                        { label: "50-Day",      val: "🏅 Badge",              c: "text-yellow-400" },
+                        { label: "100-Day",      val: "🏅 Badge",              c: "text-yellow-400" },
                       ].map((s, i) => (
                         <div key={i}>
                           <div className={`text-sm font-bold ${s.c}`}>{s.val}</div>
