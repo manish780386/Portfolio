@@ -1,0 +1,148 @@
+\documentclass[10pt, a4paper]{article}
+
+% ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[a4paper, top=8mm, bottom=8mm, left=14mm, right=14mm]{geometry}
+\usepackage{fontenc}
+\usepackage{inputenc}
+
+\usepackage{microtype}
+\usepackage[skip=0pt]{parskip}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=blue,
+  pdftitle={Manish Dange Resume},
+  pdfauthor={Manish Dange}
+}
+
+\pagestyle{empty}
+
+% Section Heading Formatting - Heading text strictly on top of horizontal rule
+\titleformat{\section}
+  {\normalfont\bfseries\normalsize}
+  {}{0em}{}
+  [\vspace{-3pt}\rule{\linewidth}{0.6pt}\vspace{-4pt}]
+
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+
+% Itemize list spacing setup
+\setlist[itemize]{
+  leftmargin=12pt,
+  itemsep=0.5pt,
+  parsep=0pt,
+  topsep=1pt,
+  partopsep=0pt,
+  label={\small\textbullet}
+}
+
+\newcommand{\entrytwo}[2]{%
+  \noindent
+  \begin{tabularx}{\linewidth}{@{}X@{\hspace{4pt}}>{\raggedleft\arraybackslash}p{5.2cm}@{}}
+    #1 & \textit{#2}
+  \end{tabularx}%
+}
+
+\newcommand{\projheading}[3]{%
+  \entrytwo{\href{#2}{\underline{\textbf{#1}}}}{#3}%
+}
+
+\begin{document}
+
+% ── Header ────────────────────────────────────────────────────────────────────
+\begin{center}
+  {\fontsize{18}{21}\selectfont\bfseries Manish Dange}\\[2pt]
+  \small
+  +91 7803861195 \;|\;
+  \href{mailto:dangemanish35@gmail.com}{dangemanish35@gmail.com} \;|\;
+  \href{https://linkedin.com/in/manish-dange-2a03b6312}{linkedin.com/in/manish-dange-2a03b6312} \;|\;
+  \href{https://github.com/manish780386}{github.com/manish780386}
+\end{center}
+
+\vspace{-4pt}
+\rule{\linewidth}{0.8pt}
+\vspace{1pt}
+
+% ── Education ─────────────────────────────────────────────────────────────────
+\section*{Education}
+
+\entrytwo{\textbf{Shri Vaishnav Vidyapeeth Vishwavidyalaya (SVVV), Indore}}{June 2023 -- June 2027}
+
+
+Bachelor of Technology in Computer Science \& Engineering (Cyber Security) \hfill \textbf{CGPA: 8.6 / 10}
+
+\vspace{4pt}
+
+\entrytwo{\textbf{Govt. Excellence Higher Secondary School, Indore}}{2023}
+
+
+Class 12th Board: \textbf{76\%} \quad|\quad Class 10th Board: \textbf{89\%}
+
+% ── Technical Skills ──────────────────────────────────────────────────────────
+\section*{Technical Skills}
+
+\textbf{Languages:} Python, C++, JavaScript (ES6+), TypeScript, SQL, Java\\
+\textbf{Web Development:} React.js, Tailwind CSS, HTML5, CSS3, React Native\\
+\textbf{Backend:} Django, Django REST Framework, REST APIs, WebSocket, Flask\\
+\textbf{Databases:} PostgreSQL, MySQL, Firebase, SQLite, Django ORM\\
+\textbf{Developer Tools \& Cloud:} Git, GitHub, Docker, AWS (EC2, S3), Linux CLI, Postman, VS Code, GitHub Actions, CI/CD\\
+\textbf{Cyber Security:} OWASP Top 10, Network Security, Penetration Testing basics, Cisco NetAcad
+
+% ── Projects ──────────────────────────────────────────────────────────────────
+\section*{Projects}
+
+\projheading{NeighborHub -- Hyperlocal Community Platform}{https://github.com/manish780386/NeighborHub}{June 2025 -- July 2025}
+\textit{Technologies: React.js, Django REST Framework, Django Channels, PostgreSQL, Redis, Celery, WebSocket, Tailwind CSS}
+\begin{itemize}
+  \item Developed a hyperlocal social platform for help requests, lost \& found, events, and alerts, using geolocation-based filtering within a configurable radius.
+  \item Implemented real-time messaging via Django Channels and WebSockets, with a modular 6-app backend, Redis caching, and Celery-driven asynchronous notifications.
+\end{itemize}
+
+\vspace{2pt}
+
+\projheading{Mitti Ka Swad -- Cultural Heritage Food Marketplace}{https://github.com/manish780386/Miiti-Ka-Swwad}{April 2025 -- May 2025}
+\textit{Technologies: React.js, Django REST Framework, PostgreSQL, SimpleJWT, Razorpay, Tailwind CSS}
+\begin{itemize}
+  \item Built a food ordering platform featuring 500+ traditional Indian dishes with regional origin and heritage storytelling, supported by a role-based vendor dashboard for orders and analytics.
+  \item Integrated Razorpay payments with HMAC SHA256 verification and bilingual (Hindi/English) voice search using the Web Speech API.
+\end{itemize}
+
+\vspace{2pt}
+
+\projheading{TripKar -- AI-Powered Travel Itinerary Planner}{https://github.com/manish780386/TRIPKAR}{May 2025 -- June 2025}
+\textit{Technologies: React.js, Django REST Framework, PostgreSQL, Redis, Celery, Anthropic Claude API, Razorpay, Docker}
+\begin{itemize}
+  \item Built an AI-driven planner that converts natural language trip descriptions into structured itineraries with budget breakdowns, using the Anthropic Claude API.
+  \item Designed a freemium model with a Razorpay paywall, and containerized the stack with Docker Compose for consistent deployment.
+\end{itemize}
+
+% ── Achievements ──────────────────────────────────────────────────────────────
+\section*{Achievements}
+
+\begin{itemize}
+  \item Mastered Data Structures \& Algorithms -- solved \textbf{500+ problems} on LeetCode, HackerRank \& GeeksforGeeks.
+  \item Published \textbf{JSON Tree Visualizer Pro} on VS Code Marketplace -- interactive JSON tree, mind-map graph, and diff tool(120+ installs) .
+  \item Published \textbf{Operator Colorizer Pro} on VS Code Marketplace -- syntax highlighting for operators across \textbf{15+ languages}.
+  \item Released \textbf{DjangoForge} -- an open-source PyPI library for automated Django project scaffolding.
+\end{itemize}
+
+% ── Certifications ────────────────────────────────────────────────────────────
+\section*{Certifications}
+
+\begin{itemize}
+  \item Internship Completion Certificate -- The Prime Step
+  \item Introduction to Cybersecurity -- Cisco Networking Academy
+  \item Internet of Things (NPTEL) -- IIT Kharagpur
+  \item Cloud Technologies -- Infosys
+  \item Python Programming Training -- Infosys
+  \item Soft Skills for Professionals (NPTEL) -- IIT Roorkee
+  \item Introduction to Cloud Computing (NPTEL) -- IIT Roorkee
+\end{itemize}
+
+\end{document}

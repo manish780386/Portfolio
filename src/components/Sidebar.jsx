@@ -62,7 +62,7 @@ export default function Sidebar() {
         {(!collapsed || mobile) && (
           <div className="overflow-hidden">
             <p className="text-sm font-semibold text-white leading-none">Manish Dange</p>
-            <p className="text-[10px] text-[#7c8aa0] font-mono-label mt-1">FULLSTACK · SECURITY</p>
+            
           </div>
         )}
       </div>

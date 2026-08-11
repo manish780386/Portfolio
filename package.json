@@ -17,6 +17,7 @@
     "framer-motion": "^12.42.2",
     "jspdf": "^4.2.1",
     "lucide-react": "^0.562.0",
+    "raw-loader": "^4.0.2",
     "react": "^19.2.0",
     "react-circular-progressbar": "^2.2.0",
     "react-countup": "^6.5.3",
