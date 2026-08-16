@@ -22,7 +22,7 @@ const ME = {
   summary:
     "Full Stack Developer and Cyber Security enthusiast pursuing B.Tech CSE at SVVV Indore. " +
     "I build scalable web applications with React and Django, and bring a security-first mindset " +
-    "to auth, APIs and data handling. 400+ DSA problems solved across platforms.",
+    "to auth, APIs and data handling. 600+ DSA problems solved across platforms.",
 };
 
 const EXPERIENCE = [{

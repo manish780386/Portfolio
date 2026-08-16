@@ -9,7 +9,7 @@ import { Radio } from "lucide-react";
   - 240+ DSA -> sum of LeetCode(106) + HackerRank(70) + CodeChef(37) + GFG(30) + Codeforces(1)
   - 8.48 CGPA -> resume, SVVV B.Tech CSE
   - 100+ Installs -> VS Code Marketplace, "JSON Tree Visualizer Pro"
-  - 400+ Commits -> GitHub profile stat
+  - 600+ Commits -> GitHub profile stat
 */
 const METRICS = [
   {

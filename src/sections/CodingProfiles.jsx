@@ -564,7 +564,7 @@ export default function CodingProfiles() {
                         { label: "Public Repos",  val: gh.publicRepos, icon: <GitBranch size={14}/>, c: "text-cyan-400"    },
                         { label: "Stars Earned",  val: `${gh.totalStars}+`, icon: <Star size={14}/>,  c: "text-yellow-400" },
                         { label: "Followers",     val: gh.followers,   icon: <Users size={14}/>,      c: "text-pink-400"   },
-                        { label: "Total Commits", val: "400+",         icon: <GitCommit size={14}/>,  c: "text-indigo-400" },
+                        { label: "Total Commits", val: "600+",         icon: <GitCommit size={14}/>,  c: "text-indigo-400" },
                       ].map((s, i) => (
                         <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
                           <div className={s.c}>{s.icon}</div>
