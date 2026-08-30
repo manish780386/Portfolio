@@ -1,24 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/*
-  Rocket cursor — replaces the browser cursor with a small rocket that
-  points in its direction of travel and leaves a thruster-flame trail.
-
-  Why this version is safe where the old CustomCursor wasn't:
-  - Only activates when `(pointer: fine)` matches, i.e. an actual mouse.
-    Touch devices never load it, so mobile is untouched.
-  - Respects prefers-reduced-motion (skips entirely).
-  - Toggles a single `custom-cursor-active` class on <body> instead of a
-    blanket `* { cursor: none !important }`. The stylesheet only hides the
-    cursor on that class, and explicitly excludes text inputs/textareas so
-    typing still shows a normal text caret.
-*/
 export default function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
-  const dotRef = useRef(null);
+  const cursorRef = useRef(null);
+  
+  // Smooth Physics Tracking (Lerp)
+  const targetPos = useRef({ x: 0, y: 0 });
+  const currentPos = useRef({ x: 0, y: 0 });
   const angle = useRef(0);
-  const lastPos = useRef({ x: 0, y: 0 });
+  
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [flames, setFlames] = useState([]);
@@ -28,6 +19,7 @@ export default function CustomCursor() {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!fine || reduced) return;
+    
     setEnabled(true);
     document.body.classList.add("custom-cursor-active");
     return () => document.body.classList.remove("custom-cursor-active");
@@ -36,47 +28,78 @@ export default function CustomCursor() {
   useEffect(() => {
     if (!enabled) return;
 
-    const move = (e) => {
-      const dx = e.clientX - lastPos.current.x;
-      const dy = e.clientY - lastPos.current.y;
-      if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
-        angle.current = Math.atan2(dy, dx) * (180 / Math.PI);
-        lastPos.current = { x: e.clientX, y: e.clientY };
+    let animationFrameId;
+
+    // Smooth Lerp loop for fluid 60/120fps motion
+    const render = () => {
+      // Lerp (Linear Interpolation) calculation: smooth speed damping
+      const ease = 0.2; 
+      const dx = targetPos.current.x - currentPos.current.x;
+      const dy = targetPos.current.y - currentPos.current.y;
+
+      currentPos.current.x += dx * ease;
+      currentPos.current.y += dy * ease;
+
+      // Calculate angle of travel (if moving significantly)
+      if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+        const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI);
+        // Smooth rotation interpolation
+        angle.current = targetAngle;
       }
 
-      if (dotRef.current) {
-        dotRef.current.style.left = `${e.clientX}px`;
-        dotRef.current.style.top = `${e.clientY}px`;
-        // +135deg: rocket art points up-right by default, rotate so the
-        // nose faces the direction of travel
-        dotRef.current.style.transform = `translate(-50%, -50%) rotate(${angle.current + 135}deg)`;
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${currentPos.current.x}px`;
+        cursorRef.current.style.top = `${currentPos.current.y}px`;
+        // Rocket SVG naturally points UP (270 deg / -90 deg), rotate relative to vector angle
+        cursorRef.current.style.transform = `translate(-50%, -50%) rotate(${angle.current + 90}deg)`;
       }
 
-      const id = ++flameId.current;
-      setFlames((prev) => [...prev.slice(-10), { id, x: e.clientX, y: e.clientY }]);
-      setTimeout(() => setFlames((prev) => prev.filter((f) => f.id !== id)), 450);
+      animationFrameId = requestAnimationFrame(render);
     };
 
-    const click = () => { setClicked(true); setTimeout(() => setClicked(false), 300); };
-    const hover = () => setHovered(true);
-    const unhover = () => setHovered(false);
+    const handleMouseMove = (e) => {
+      targetPos.current = { x: e.clientX, y: e.clientY };
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("click", click);
+      // Spawn thruster particles on move
+      const id = ++flameId.current;
+      setFlames((prev) => [
+        ...prev.slice(-12), 
+        { id, x: e.clientX, y: e.clientY, angle: angle.current }
+      ]);
 
-    const attach = () => {
-      document.querySelectorAll("a,button,[data-cursor]").forEach((el) => {
-        el.addEventListener("mouseenter", hover);
-        el.addEventListener("mouseleave", unhover);
+      setTimeout(() => {
+        setFlames((prev) => prev.filter((f) => f.id !== id));
+      }, 400);
+    };
+
+    const handleClick = () => {
+      setClicked(true);
+      setTimeout(() => setClicked(false), 300);
+    };
+
+    const handleHover = () => setHovered(true);
+    const handleUnhover = () => setHovered(false);
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", handleClick);
+    render();
+
+    // Attach hover detection dynamically
+    const attachHoverEvents = () => {
+      document.querySelectorAll("a, button, [data-cursor], input, textarea").forEach((el) => {
+        el.addEventListener("mouseenter", handleHover);
+        el.addEventListener("mouseleave", handleUnhover);
       });
     };
-    attach();
-    const observer = new MutationObserver(attach);
+    
+    attachHoverEvents();
+    const observer = new MutationObserver(attachHoverEvents);
     observer.observe(document.body, { subtree: true, childList: true });
 
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("click", click);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", handleClick);
+      cancelAnimationFrame(animationFrameId);
       observer.disconnect();
     };
   }, [enabled]);
@@ -85,62 +108,120 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* THRUSTER FLAME TRAIL */}
+      {/* THRUSTER FLAME & PARTICLES TRAIL */}
       {flames.map((f, i) => (
         <motion.div
           key={f.id}
-          initial={{ opacity: 0.75, scale: 1 }}
-          animate={{ opacity: 0, scale: 0.2 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
+          initial={{ opacity: 0.9, scale: 1.2 }}
+          animate={{ opacity: 0, scale: 0.1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="fixed pointer-events-none z-[9995]"
-          style={{ left: f.x, top: f.y, transform: "translate(-50%,-50%)" }}
+          style={{
+            left: f.x,
+            top: f.y,
+            transform: "translate(-50%, -50%)",
+          }}
         >
           <div
             className="rounded-full"
             style={{
-              width: `${3 + (i % 3)}px`,
-              height: `${3 + (i % 3)}px`,
-              background: i % 2 === 0 ? "rgba(245,167,66,0.85)" : "rgba(52,211,153,0.75)",
-              boxShadow: i % 2 === 0 ? "0 0 6px rgba(245,167,66,0.6)" : "0 0 6px rgba(52,211,153,0.5)",
+              width: `${4 + (i % 4)}px`,
+              height: `${4 + (i % 4)}px`,
+              background:
+                i % 3 === 0
+                  ? "#34d399"
+                  : i % 2 === 0
+                  ? "#f59e0b"
+                  : "#ef4444",
+              boxShadow:
+                i % 2 === 0
+                  ? "0 0 10px rgba(52, 211, 153, 0.9)"
+                  : "0 0 10px rgba(245, 158, 11, 0.9)",
             }}
           />
         </motion.div>
       ))}
 
-      {/* ROCKET */}
+      {/* ROCKET CONTAINER */}
       <div
-        ref={dotRef}
+        ref={cursorRef}
         className="fixed pointer-events-none z-[9999]"
-        style={{ willChange: "transform, left, top", transition: "transform 0.06s linear" }}
+        style={{ willChange: "transform, left, top" }}
       >
-        <motion.div animate={{ scale: clicked ? 1.35 : hovered ? 1.2 : 1 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-          <svg width={hovered ? 30 : 24} height={hovered ? 30 : 24} viewBox="0 0 24 24" fill="none"
-            style={{ filter: `drop-shadow(0 0 ${hovered ? 7 : 4}px rgba(52,211,153,0.85))` }}>
-            {/* exhaust flame (behind body, points opposite the nose) */}
+        <motion.div
+          animate={{
+            scale: clicked ? 1.4 : hovered ? 1.25 : 1,
+          }}
+          transition={{ type: "spring", stiffness: 450, damping: 22 }}
+        >
+          <svg
+            width={hovered ? 36 : 28}
+            height={hovered ? 36 : 28}
+            viewBox="0 0 64 64"
+            fill="none"
+            className="drop-shadow-[0_0_10px_rgba(52,211,153,0.8)]"
+          >
+            {/* REALISTIC ENGINE THRUSTER PLUME (ANIMATED BACK FLAME) */}
             <motion.path
-              d="M9.5 15.5c-1 1.6-1 3-1 3l2.2-.8 1.3 1.3.9-2" fill="#f5b942"
-              animate={{ opacity: [0.5, 1, 0.5] }} transition={{ repeat: Infinity, duration: 0.35 }}
+              d="M26 44 L32 58 L38 44 Z"
+              fill="url(#fireGradient)"
+              animate={{
+                scaleY: hovered ? [1, 1.4, 1] : [1, 1.2, 1],
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{ repeat: Infinity, duration: 0.15 }}
             />
-            {/* rocket body */}
-            <path
-              d="M12 2c2.2 1.8 3.4 4.6 3.4 7.6 0 2-.5 3.7-1.3 5.2l-2.1 1-2.1-1c-.8-1.5-1.3-3.2-1.3-5.2C8.6 6.6 9.8 3.8 12 2z"
-              fill="#e7ecf2" stroke="#34d399" strokeWidth="0.6"
-            />
-            {/* window */}
-            <circle cx="12" cy="8.6" r="1.3" fill="#34d399" />
-            {/* fins */}
-            <path d="M8.6 12.5 6.3 15l2.3-.5z" fill="#60a5fa" />
-            <path d="M15.4 12.5 17.7 15l-2.3-.5z" fill="#60a5fa" />
 
+            {/* SIDE FINS */}
+            <path d="M16 34 L8 44 L20 42 Z" fill="#60a5fa" stroke="#1d4ed8" strokeWidth="1.5" />
+            <path d="M48 34 L56 44 L44 42 Z" fill="#60a5fa" stroke="#1d4ed8" strokeWidth="1.5" />
+
+            {/* MAIN ROCKET BODY */}
+            <path
+              d="M32 4 C22 16 20 30 20 42 L44 42 C44 30 42 16 32 4 Z"
+              fill="url(#bodyGradient)"
+              stroke="#34d399"
+              strokeWidth="1.5"
+            />
+
+            {/* NOSE CONE HIGHLIGHT */}
+            <path d="M32 4 C28 12 26 18 26 22 L38 22 C38 18 36 12 32 4 Z" fill="#34d399" />
+
+            {/* COCKPIT GLASS (WINDOW) */}
+            <circle cx="32" cy="26" r="5" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
+            <circle cx="33.5" cy="24.5" r="1.5" fill="#ffffff" />
+
+            {/* SHOCKWAVE BURST ON CLICK */}
             <AnimatePresence>
               {clicked && (
                 <motion.circle
-                  cx="12" cy="12" r="3" fill="none" stroke="#34d399" strokeWidth="1"
-                  initial={{ r: 3, opacity: 1 }} animate={{ r: 11, opacity: 0 }} exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
+                  cx="32"
+                  cy="32"
+                  r="6"
+                  fill="none"
+                  stroke="#34d399"
+                  strokeWidth="2"
+                  initial={{ r: 6, opacity: 1 }}
+                  animate={{ r: 28, opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
                 />
               )}
             </AnimatePresence>
+
+            {/* GRADIENTS */}
+            <defs>
+              <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f8fafc" />
+                <stop offset="100%" stopColor="#cbd5e1" />
+              </linearGradient>
+
+              <linearGradient id="fireGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#34d399" />
+                <stop offset="50%" stopColor="#fbbf24" />
+                <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+              </linearGradient>
+            </defs>
           </svg>
         </motion.div>
       </div>
