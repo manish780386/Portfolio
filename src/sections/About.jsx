@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone, Github, Linkedin, Code2, ExternalLink } from "lucide-react";
 import { SectionWrapper, SectionTitle, SectionSubtitle } from "../components/SectionWrapper";
 import { useInView } from "react-intersection-observer";
-import manish from "../assets/manish.png";
 
+/* ── Terminal readout ── */
 const READOUT_LINES = [
-  { key: "role", value: '"Full-Stack Developer"' },
-  { key: "focus", value: '"Cyber Security"' },
-  { key: "stack", value: '["React", "Django", "PostgreSQL"]' },
-  { key: "currently_building", value: '"AI ticketing assistant"' },
-  { key: "dsa_problems_solved", value: "500+" },
-  { key: "status", value: '"open_to_work"' },
+  { key: "role",                value: '"Full-Stack Developer"' },
+  { key: "focus",               value: '"Cyber Security"' },
+  { key: "stack",               value: '["React", "Django", "PostgreSQL"]' },
+  { key: "currently_building",  value: '"AI-powered projects"' },
+  { key: "status",              value: '"open_to_work"' },
 ];
 
-/* Terminal-style readout — line-by-line reveal with a blinking cursor at
-   the end, instead of generic vanity-metric cards. */
 function TerminalReadout() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const [shown, setShown] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
-    if (shown >= READOUT_LINES.length) return;
-    const t = setTimeout(() => setShown((s) => s + 1), 220);
+    if (!inView || shown >= READOUT_LINES.length) return;
+    const t = setTimeout(() => setShown(s => s + 1), 220);
     return () => clearTimeout(t);
   }, [inView, shown]);
 
@@ -39,8 +35,7 @@ function TerminalReadout() {
         <p className="text-[#4b5768]">$ whoami --verbose</p>
         <p className="text-[#c7d0dc]">{"{"}</p>
         {READOUT_LINES.map((line, i) => (
-          <motion.p
-            key={line.key}
+          <motion.p key={line.key}
             initial={{ opacity: 0, x: -8 }}
             animate={shown > i ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.3 }}
@@ -67,6 +62,7 @@ function TerminalReadout() {
   );
 }
 
+
 export default function About() {
   return (
     <SectionWrapper id="about" className="py-24">
@@ -75,58 +71,118 @@ export default function About() {
         <SectionSubtitle>A quick read before you check the receipts below.</SectionSubtitle>
 
         <div className="grid md:grid-cols-5 gap-12 items-start">
-          {/* PHOTO */}
+
+          {/* ── LEFT ── */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-2"
+            className="md:col-span-2 space-y-5"
           >
-            <div className="relative">
-              <div className="absolute -inset-3 bg-gradient-to-br from-[#34d399]/10 to-[#60a5fa]/10 rounded-3xl blur-2xl" />
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/10">
-                <img src={manish} alt="Manish Dange" className="w-full h-full object-cover"  loading="lazy"    
-  decoding="async" />
+            {/* Info card */}
+            <div className="rounded-2xl overflow-hidden border border-white/[0.07] bg-white/[0.02]">
+
+              {/* Top gradient bar */}
+              <div className="h-1 w-full bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-500" />
+
+              <div className="p-5 space-y-4">
+                {/* Name */}
+                <div>
+                  <h3 className="text-white font-black text-xl">Manish Dange</h3>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-white/[0.06]" />
+
+                {/* Contact info */}
+                <div className="space-y-2.5">
+                  {[
+                    { icon: <MapPin size={12} />, text: "Indore, Madhya Pradesh, India" },
+                    { icon: <Mail size={12} />,   text: "dangemanish35@gmail.com" },
+                    { icon: <Phone size={12} />,  text: "+91 7803861195" },
+                  ].map((c, i) => (
+                    <div key={i} className="flex items-center gap-2.5 text-gray-400 text-xs">
+                      <span className="text-cyan-400 shrink-0">{c.icon}</span>
+                      {c.text}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-white/[0.06]" />
+
+                {/* Social links */}
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { icon: <Github size={13} />,   label: "GitHub",   url: "https://github.com/manish780386",                color: "#e2e8f0" },
+                    { icon: <Linkedin size={13} />, label: "LinkedIn", url: "https://linkedin.com/in/manish-dange-2a03b6312", color: "#0A66C2" },
+                    { icon: <Code2 size={13} />,    label: "LeetCode", url: "https://leetcode.com/u/dangemanish/",            color: "#FFA116" },
+                  ].map((s, i) => (
+                    <motion.a key={i}
+                      href={s.url} target="_blank" rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="flex flex-col items-center gap-1.5 py-3 rounded-xl text-[10px] font-semibold transition-all"
+                      style={{ background: `${s.color}10`, border: `1px solid ${s.color}25`, color: s.color }}
+                    >
+                      {s.icon}
+                      {s.label}
+                    </motion.a>
+                  ))}
+                </div>
+
+                {/* Availability badge */}
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-green-500/8 border border-green-500/20">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+                  </span>
+                  <span className="text-green-400 text-[11px] font-semibold">Available for internships</span>
+                </div>
               </div>
             </div>
-            <div className="mt-4 space-y-2">
-              {[
-                { icon: <MapPin size={13} />, text: "Indore, Madhya Pradesh, India" },
-                { icon: <Mail size={13} />,   text: "dangemanish35@gmail.com" },
-                { icon: <Phone size={13} />,  text: "+91 78038 61195" },
-              ].map((c, i) => (
-                <div key={i} className="flex items-center gap-2.5 text-[#7c8aa0] text-xs">
-                  <span className="text-[#34d399]">{c.icon}</span>{c.text}
-                </div>
-              ))}
-            </div>
+
+
           </motion.div>
 
-          {/* TEXT */}
+          {/* ── RIGHT ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="md:col-span-3"
+            className="md:col-span-3 space-y-6"
           >
-            <p className="text-gray-200 mb-4 leading-8 text-[15px]">
-              I'm a <span className="text-[#34d399] font-medium">Computer Science undergraduate</span> at
-              Shri Vaishnav Vidyapeeth Vishwavidyalaya (SVVV), Indore, specializing in Information &amp;
-              Cyber Security — currently in my 3rd year.
-            </p>
-            <p className="text-[#7c8aa0] mb-6 leading-7 text-sm">
-              Day to day, I build full-stack products with React on the front end and Django REST
-              Framework on the back — job portals, student note-sharing platforms, and CRM tools that
-              are actually in use, not just tutorial clones. The cyber security specialization shapes how
-              I build: auth flows, input validation, and API security aren't an afterthought for me.
-              Outside of shipping, I spend time on LeetCode and HackerRank sharpening data structures
-              and algorithms.
-            </p>
+            <div className="space-y-5">
+              <p className="text-gray-200 leading-8 text-[15px]">
+                I am a <span className="text-cyan-400 font-semibold">Computer Science undergraduate</span> at
+                Shri Vaishnav Vidyapeeth Vishwavidyalaya, Indore, specializing in Information &amp; Cyber
+                Security. I design and ship production-grade web applications end-to-end — from
+                pixel-precise React interfaces to secure, scalable Django REST back-ends backed by
+                PostgreSQL.
+              </p>
 
+              <p className="text-gray-500 leading-7 text-sm">
+                My work spans a range of domains: an AI-powered travel planner that generates
+                day-by-day itineraries from plain-language prompts, a hyperlocal community platform with
+                real-time WebSocket messaging, a cultural heritage food marketplace with bilingual voice
+                search, and a career acceleration platform built on OpenAI. Each project is deployed,
+                not just committed.
+              </p>
+
+              <p className="text-gray-500 leading-7 text-sm">
+                Security is not a layer I add at the end — it is part of how I architect from day one.
+                JWT token rotation, HMAC-verified payment callbacks, OWASP-aware input handling, and
+                role-based access control are standard in every codebase I own. I have also published
+                two VS Code extensions on the Marketplace and an open-source scaffolding library on PyPI
+                used to bootstrap Django projects in a single command.
+              </p>
+            </div>
+
+            {/* Terminal */}
             <TerminalReadout />
           </motion.div>
+
         </div>
       </div>
     </SectionWrapper>
