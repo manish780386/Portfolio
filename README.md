@@ -190,7 +190,7 @@ In `index.css`:
 | | |
 |--|--|
 | 📧 Email | [dangemanish35@gmail.com](mailto:dangemanish35@gmail.com) |
-| 📱 Phone | +91 7903861195 |
+| 📱 Phone | +91 7803861195 |
 | 🌍 Location | Indore, Madhya Pradesh, India |
 | 💼 LinkedIn | [manish-dange-2a03b6312](https://linkedin.com/in/manish-dange-2a03b6312) |
 | 🐙 GitHub | [manish780386](https://github.com/manish780386) |
