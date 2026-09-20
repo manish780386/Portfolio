@@ -2,8 +2,8 @@
 
 <div align="center">
 
-![Portfolio Preview](![Uploading image.png…]()
-)
+![Uploading image.png…]()
+
 
 **Full Stack Developer & Cyber Security Enthusiast**
 B.Tech CSE (Cyber Security) · SVVV Indore · 2023–2027
