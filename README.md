@@ -2,7 +2,8 @@
 
 <div align="center">
 
-![Portfolio Preview](https://github.com/manish780386/portfolio/raw/main/public/screenshots/preview.png)
+![Portfolio Preview](![Uploading image.png…]()
+)
 
 
 **Full Stack Developer & Cyber Security Enthusiast**
