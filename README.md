@@ -1,7 +1,6 @@
 # 🚀 Manish Dange — Personal Portfolio
 
 <div align="center">
-![Portfolio Preview](https://github.com/manish780386/portfolio/raw/main/public/screenshots/preview.png)
 
 **Full Stack Developer & Cyber Security Enthusiast**
 B.Tech CSE (Cyber Security) · SVVV Indore · 2023–2027
