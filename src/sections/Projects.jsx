@@ -17,7 +17,7 @@ const PUBLISHED = [
     desc: "Instantly turn any JSON into an interactive tree, mind-map graph, diff view, API client, and format converter — all without leaving your editor.",
     icon: "🌳",
     stats: [
-      { label: "Installs", val: "167+",  icon: <Download size={13} /> },
+      { label: "Installs", val: "100+",  icon: <Download size={13} /> },
       { label: "Version",  val: "1.0.0", icon: <Zap size={13} /> },
       { label: "Rating",   val: "5.0 ★", icon: <Star size={13} /> },
     ],
@@ -34,7 +34,7 @@ const PUBLISHED = [
     desc: "Highlights arithmetic, comparison, logical, assignment, and bitwise operators with distinct colors across 15+ languages. Toggle on/off from the status bar.",
     icon: "🎨",
     stats: [
-      { label: "Installs", val: "20+",   icon: <Download size={13} /> },
+      { label: "Installs", val: "13+",   icon: <Download size={13} /> },
       { label: "Version",  val: "1.0.3", icon: <Zap size={13} /> },
       { label: "Rating",   val: "4.0 ★", icon: <Star size={13} /> },
     ],
@@ -76,7 +76,7 @@ const PROJECTS = [
     desc: "Plan your perfect Indian trip with AI. Just say 'Delhi to Goa, 4 days, ₹15k' and TripKar builds your complete itinerary — budget, hotels, routes, weather — all in one place.",
     tech: ["React", "Django", "Claude AI", "PostgreSQL", "Redis", "Razorpay", "Celery"],
     highlights: ["AI Itinerary Generator", "Smart Budget Calculator", "5 Free Trips + Paywall", "English + Hindi (i18next)", "WhatsApp Share"],
-    githubUrl: "https://github.com/manish780386/TRIPKAR",
+    githubUrl: "https://github.com/manish780386/AIPE-AI-Powered-Everthing",
     category: "Full Stack", featured: true,
     gradient: "from-sky-500 via-cyan-500 to-teal-500",
     accentColor: "#06b6d4",
@@ -91,7 +91,7 @@ const PROJECTS = [
     desc: "Apni colony, apna network — connects people within 2km radius. Real-time WebSocket chat, interactive Leaflet.js map, community groups, marketplace, and live notifications.",
     tech: ["React", "Django", "WebSocket", "PostgreSQL", "Redis", "Leaflet.js", "Celery"],
     highlights: ["2km Radius Feed", "Real-time WebSocket Chat", "Interactive Map", "Marketplace", "Community Groups"],
-    githubUrl: "https://github.com/manish780386/NeighborHub",
+    githubUrl: "https://github.com/manish780386",
     category: "Full Stack", featured: true,
     gradient: "from-green-500 via-emerald-500 to-teal-500",
     accentColor: "#22c55e",
@@ -106,7 +106,7 @@ const PROJECTS = [
     desc: "Cultural preservation food ordering platform connecting customers to authentic traditional Indian dishes from 28 states. Every dish carries its cultural story, grandma's tip, and festival association.",
     tech: ["React", "Django", "PostgreSQL", "Razorpay", "Tailwind", "Framer Motion"],
     highlights: ["500+ Heritage Dishes", "28 Indian States", "Voice Search (Hindi/English)", "Cultural Storytelling", "Vendor Dashboard"],
-    githubUrl: "https://github.com/manish780386/Miiti-Ka-Swwad",
+    githubUrl: "https://github.com/manish780386",
     category: "Full Stack", featured: true,
     gradient: "from-orange-500 via-amber-500 to-yellow-500",
     accentColor: "#f97316",
@@ -115,6 +115,21 @@ const PROJECTS = [
   },
   {
     id: 4,
+    name: "Museum Chatbot",
+    subtitle: "AI Ticketing System",
+    emoji: "🏛️",
+    desc: "AI-powered chatbot ticketing system for City Museum — book tickets by chatting, no forms needed. Razorpay payment, instant QR code ticket generation, PDF download, email confirmation, and admin analytics dashboard.",
+    tech: ["React", "Django", "PostgreSQL", "Razorpay", "Dialogflow", "JWT", "Tailwind"],
+    highlights: ["AI Chatbot Booking Flow", "QR Code Ticket", "Razorpay Payments", "Email Confirmation", "Admin Dashboard"],
+    githubUrl: "https://github.com/manish780386/Online-Chatbot-for-City-Museum",
+    category: "Full Stack", featured: true,
+    gradient: "from-purple-500 via-violet-500 to-indigo-500",
+    accentColor: "#8b5cf6",
+    bgEmoji: "🏛️🤖🎫",
+    screenshot: null,
+  },
+  {
+    id: 5,
     name: "AIPE Platform",
     subtitle: "AI Powered Everything",
     emoji: "🤖",
@@ -123,8 +138,8 @@ const PROJECTS = [
     highlights: ["Resume AI Analyzer", "Code Review AI", "Live Interview Coach", "Study Planner AI", "Real-time Notifications"],
     githubUrl: "https://github.com/manish780386/AIPE-AI-Powered-Everthing",
     category: "AI / ML", featured: true,
-    gradient: "from-purple-500 via-violet-500 to-indigo-500",
-    accentColor: "#8b5cf6",
+    gradient: "from-pink-500 via-rose-500 to-red-500",
+    accentColor: "#ec4899",
     bgEmoji: "🤖💻📊",
     screenshot: null,
   },
@@ -444,7 +459,7 @@ export default function Projects() {
           </div>
 
           {/* GRID */}
-          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="popLayout">
               {filtered.map((p, i) => <ProjectCard key={p.id} p={p} i={i} />)}
             </AnimatePresence>
