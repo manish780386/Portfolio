@@ -84,7 +84,7 @@ export default function Certifications() {
   return (
     <SectionWrapper id="certifications" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle index="03" label="Always learning" main="Certifications" />
+        <SectionTitle label="Always learning" main="Certifications" />
         <SectionSubtitle>10 credentials across cyber security, AI and dev tooling — tap any card.</SectionSubtitle>
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {CERTS.map((c, i) => <CertCard key={c.title + c.org} cert={c} i={i} />)}
